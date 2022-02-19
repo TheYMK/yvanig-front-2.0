@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<div class="my-8 self-center">
-			<button class="btn btn-sm text-xs btn-primary rounded-md">Réserver</button>
+			<button class="btn btn-primary rounded lg:w-48 w-36 text-xs">Réserver</button>
 		</div>
 	</div>
 </div>

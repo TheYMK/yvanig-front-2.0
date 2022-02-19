@@ -18,8 +18,9 @@
 		<h2 class="text-white font-medium text-xl mt-2">Comores</h2>
 
 		<div class="w-24 bg-white h-[2px] mt-4" class:hidden={!showDetails} />
-		<button class="btn btn-primary rounded-full mt-8 text-xs" class:hidden={!showDetails}
-			>Découvrir</button
+		<button
+			class="btn btn-primary rounded-full lg:w-48 w-36 text-xs mt-8"
+			class:hidden={!showDetails}>Découvrir</button
 		>
 	</div>
 </div>
