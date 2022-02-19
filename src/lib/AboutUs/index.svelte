@@ -20,7 +20,7 @@
 					aliquid delectus eius accusamus, minus rem quos ut inventore voluptate minima incidunt
 					quia nulla excepturi fugit velit!
 				</p>
-				<button class="btn btn-primary rounded-full mt-10 text-md">En savoir plus</button>
+				<button class="btn btn-primary rounded-full w-48 text-xs mt-10">En savoir plus</button>
 			</div>
 		</div>
 	</div>

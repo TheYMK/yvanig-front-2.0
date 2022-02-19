@@ -41,7 +41,7 @@
 				Hey! Bienvenue sur<br />Yvanig Tour
 			</h1>
 			<p class="mb-5 text-primary-content text-md">Votre plus beau voyage démarre ici !</p>
-			<button class="btn btn-primary rounded-full w-48">Découvrir</button>
+			<button class="btn btn-primary rounded-full w-48 text-xs">Découvrir</button>
 		</div>
 		<div class="rightSide w-full hidden lg:block">
 			<div class="card w-full h-full bg-neutral reservation-card text-primary-content">
@@ -52,7 +52,7 @@
 							class="menu bg-white text-black font-semibold menu-horizontal rounded-box p-2 w-full flex justify-center space-x-4"
 						>
 							<li
-								class="rounded-md"
+								class="rounded"
 								class:bg-neutral={selectedCategory === 'hotel'}
 								class:text-white={selectedCategory === 'hotel'}
 								on:click={() => (selectedCategory = 'hotel')}
@@ -60,7 +60,7 @@
 								<a href="/">Hôtel</a>
 							</li>
 							<li
-								class="rounded-md"
+								class="rounded"
 								class:bg-neutral={selectedCategory === 'trip'}
 								class:text-white={selectedCategory === 'trip'}
 								on:click={() => (selectedCategory = 'trip')}
@@ -370,7 +370,9 @@
 								</form>
 							{/if}
 							<div class="justify-end card-actions mt-4">
-								<button class="btn btn-primary" on:click={onSearch}>Rechercher</button>
+								<button class="btn btn-primary rounded w-48 text-xs" on:click={onSearch}
+									>Rechercher</button
+								>
 							</div>
 						</div>
 					</div>

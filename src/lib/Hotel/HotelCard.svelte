@@ -41,7 +41,7 @@
 			</div>
 			<div class="flex flex-row justify-between items-center mt-4">
 				<div class="">
-					<button class="btn btn-primary rounded-md btn-md">Reserver</button>
+					<button class="btn btn-primary rounded w-36 text-xs">Reserver</button>
 				</div>
 				<div class="">
 					<i class="fa fa-star active text-yellow-400" /><span class="text-white text-sm ml-2"

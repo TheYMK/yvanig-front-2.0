@@ -100,7 +100,9 @@
 							Contactez-nous
 						</a>
 						<div class="lg:ml-5">
-							<button class="btn rounded-full btn-sm text-xs btn-primary w-40">Se Connecter</button>
+							<a href="/auth/login" class="btn rounded-full btn-sm text-xs btn-primary w-40"
+								>Se Connecter</a
+							>
 						</div>
 					</div>
 				</div>
