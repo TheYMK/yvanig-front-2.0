@@ -1,14 +1,14 @@
-<script>
-	import '../app.css';
-	import { addMessages, getLocaleFromNavigator, init } from 'svelte-i18n';
-	import en from '../locales/en.json';
+<script lang="ts">
+	import '../app.css'
+	import { addMessages, getLocaleFromNavigator, init } from 'svelte-i18n'
+	import fr from '../locales/fr.json'
 
-	addMessages('en', en);
+	addMessages('fr', fr)
 
 	init({
-		fallbackLocale: 'en',
+		fallbackLocale: 'fr',
 		initialLocale: getLocaleFromNavigator()
-	});
+	})
 </script>
 
 <main>
