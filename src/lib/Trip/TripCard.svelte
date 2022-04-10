@@ -9,43 +9,46 @@
 	export let company_logo = ''
 </script>
 
-<div class="trip-card w-full h-97 bg-neutral px-4">
+<div class="trip-card w-full h-97 bg-white px-4">
 	<div class="flex flex-col items-center">
 		<div class="avatar mt-6">
 			<div class="w-24 rounded-full">
-				<img src="https://api.lorem.space/image/face?hash=92310" alt="company logo" />
+				<img
+					src="https://logos-marques.com/wp-content/uploads/2020/12/Air-France-Logo-1998.jpg"
+					alt="company logo"
+				/>
 			</div>
 		</div>
 		<div class="mt-4">
 			{#if trip_type === 'flight'}
-				<i class="fa-solid fa-plane-departure text-white text-2xl" />
+				<i class="fa-solid fa-plane-departure text-secondary text-2xl" />
 			{:else}
-				<i class="fa-solid fa-ship text-white text-2xl" />
+				<i class="fa-solid fa-ship text-secondary text-2xl" />
 			{/if}
 		</div>
 		<div class="mt-4">
-			<span class="text-white font-bold text-xs"
+			<span class="text-secondary font-bold text-xs"
 				>{start_location} <i class="fa-solid fa-arrow-right" /> {end_location}</span
 			>
 		</div>
 		<div class="grid grid-cols-2 gap-8 mt-4 place-items-center w-full">
-			<div class="text-white">
+			<div class="text-secondary">
 				<span class="font-bold text-xs">Départ:</span>
 				<br />
 				<span class="text-xs">{departure_date}</span>
 			</div>
-			<div class="text-white">
+			<div class="text-secondary">
 				<span class="font-bold text-xs">Heure:</span>
 				<br />
 				<span class="text-xs">{departure_hour}</span>
 			</div>
 			<!--  -->
-			<div class="text-white">
+			<div class="text-secondary">
 				<span class="font-bold text-xs">Arrivée:</span>
 				<br />
 				<span class="text-xs">{arrival_date}</span>
 			</div>
-			<div class="text-white">
+			<div class="text-secondary">
 				<span class="font-bold text-xs">Heure:</span>
 				<br />
 				<span class="text-xs">{arrival_hour}</span>
@@ -63,8 +66,12 @@
 		border-radius: 15px;
 		-moz-border-radius: 15px;
 		-webkit-border-radius: 15px;
-		background: rgba(255, 255, 255, 0.02);
+		/* background: rgba(255, 255, 255, 0.02); */
 		box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
 		border-top: solid 1px rgba(255, 255, 255, 0.1);
+	}
+
+	.avatar img {
+		@apply bg-contain object-contain;
 	}
 </style>

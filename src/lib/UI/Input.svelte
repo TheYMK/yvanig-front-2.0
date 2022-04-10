@@ -3,7 +3,7 @@
 	export let inputId = ''
 	export let isRequired = false
 	export let placeholder = ''
-	export let type = ''
+	export let type = 'text'
 	export let inputClass = ''
 	export let value = ''
 </script>
