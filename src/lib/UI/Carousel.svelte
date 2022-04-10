@@ -2,6 +2,7 @@
 	import { flip } from 'svelte/animate'
 	import { onDestroy } from 'svelte'
 	import IslandCard from '$lib/Island/IslandCard.svelte'
+	import HeroItem from '$lib/Hero/HeroItem.svelte'
 	export let carouselItems = null
 	// export let itemWidth = 300
 	// export let itemSpacing = 20
@@ -54,26 +55,19 @@
 				</div>
 			{/each}
 		</div>
-	{:else}
+	{:else if carousel_type === 'images'}
 		<div id="carousel-images">
 			{#each carouselItems as item (item.id)}
-				<div>Hello</div>
-				<!-- <img
-					src={item.path}
-					alt={item.id}
-					id={item.id}
-					style={`width:${imageWidth}px; margin: 0 ${imageSpacing}px;`}
-					on:mouseover={stopAutoPlay}
-					on:mouseout={startAutoPlay}
-					animate:flip={{ duration: speed }}
-				/> -->
+				<div id={item.id} animate:flip={{ duration: speed }} class="mx-4">
+					<HeroItem itemImage={item.path} />
+				</div>
 			{/each}
 		</div>
 	{/if}
 	{#if displayControls}
 		<button id="left" on:click={rotateLeft}>
 			<slot name="left-control">
-				<div class="tooltip" data-tip="Previous">
+				<div class="tooltip" data-tip="Précédent">
 					<div class="rotate-180">
 						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
 							><path
@@ -87,7 +81,7 @@
 		</button>
 		<button id="right" on:click={rotateRight}>
 			<slot name="right-control">
-				<div class="tooltip" data-tip="Next">
+				<div class="tooltip" data-tip="Suivant">
 					<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
 						><path
 							fill="#ffffff"
@@ -102,18 +96,18 @@
 
 <style>
 	#carousel-container {
-		/* width: 100%; */
+		width: 100%;
 		position: relative;
-		/* display: flex;
-		flex-direction: column; */
+		display: flex;
+		flex-direction: column;
 		overflow-x: hidden;
 	}
 	#carousel-images {
 		display: flex;
 		justify-content: center;
 		flex-wrap: nowrap;
-		/* -webkit-mask: linear-gradient(to right, transparent, black 40%, black 60%, transparent); */
-		/* mask: linear-gradient(to right, transparent, black 40%, black 60%, transparent); */
+		-webkit-mask: linear-gradient(90deg, #000 0%, #fff 100%);
+		mask: linear-gradient(90deg, #000 0%, #fff 100%);
 	}
 	button {
 		position: absolute;

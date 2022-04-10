@@ -1,4 +1,6 @@
 <script lang="ts">
+	import logo from '../../assets/logo_white.png'
+
 	export let sticky = false
 	let isMobileMenuOpen = false
 	let y: any
@@ -31,7 +33,7 @@
 			on:click={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
 		>
 			<a href="/" class="mr-8">
-				<h1 class="text-white font-bold">YVANIG LOGO</h1>
+				<img src={logo} alt="" class="w-32" />
 			</a>
 		</div>
 		<div id="right-side" class="flex flex-row items-center">
@@ -82,7 +84,7 @@
 							Accueil
 						</a>
 						<a
-							href="/"
+							href="/discover"
 							class="hover:text-primary text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5"
 						>
 							Découvrir

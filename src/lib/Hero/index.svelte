@@ -384,9 +384,9 @@
 
 <style>
 	.background-image {
-		/* background-image: linear-gradient(360deg, #14263b 0%, rgba(255, 18, 250, 0) 10%),
-			url('/src/assets/bg/bg_hero.png'); */
-		background-color: #496ddb;
+		background-image: linear-gradient(360deg, #008080 0%, rgba(255, 18, 250, 0) 10%),
+			url('/src/assets/bg/bg_hero.png');
+		background-color: #008080;
 		background-repeat: no-repeat;
 		background-size: cover;
 	}

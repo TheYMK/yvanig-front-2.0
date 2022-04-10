@@ -7,7 +7,7 @@
 	export let hotelDescription = ''
 </script>
 
-<div class="hotel mycard h-480 relative p-5 flex flex-col">
+<div class="hotel mycard h-480 relative p-5 flex flex-col bg-white">
 	<div class="author absolute inline-block z-10">
 		<div class="avatar">
 			<div class="mb-8 w-12 h-12 ring ring-primary ring-offset-2 rounded-btn">
@@ -28,23 +28,23 @@
 		<div class="">
 			<!-- title -->
 			<a href="/">
-				<h4 class="text-white font-bold">{hotelName}</h4>
+				<h4 class="text-secondary font-bold">{hotelName}</h4>
 			</a>
 			<!-- description -->
-			<div class="text-white text-md">
+			<div class="text-secondary text-md">
 				<span>{hotelDescription && hotelDescription.substring(0, 50)}...</span>
 			</div>
 		</div>
 		<div class="flex flex-col">
 			<div class="flex flex-row justify-end">
-				<h2 class="text-white font-bold">{hotelPrice} KMF / nuit</h2>
+				<h2 class="text-secondary font-bold">{hotelPrice} KMF / nuit</h2>
 			</div>
 			<div class="flex flex-row justify-between items-center mt-4">
 				<div class="">
 					<button class="btn btn-primary rounded w-36 text-xs">Reserver</button>
 				</div>
 				<div class="">
-					<i class="fa fa-star active text-yellow-400" /><span class="text-white text-sm ml-2"
+					<i class="fa fa-star active text-yellow-400" /><span class="text-secondary text-sm ml-2"
 						>{hotelRating}</span
 					>
 				</div>
@@ -59,7 +59,7 @@
 		border-radius: 15px;
 		-moz-border-radius: 15px;
 		-webkit-border-radius: 15px;
-		background: rgba(255, 255, 255, 0.02);
+		/* background: rgba(255, 255, 255, 0.02); */
 		box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
 		border-top: solid 1px rgba(255, 255, 255, 0.1);
 	}

@@ -14,14 +14,14 @@
 	<Island />
 </div>
 <div class="mt-20">
-	<RecomendedHotels />
+	<RecentTrips />
 </div>
 <div class="mt-20">
 	<AboutUs />
 </div>
-<div class="mt-20">
-	<RecentTrips />
-</div>
+<!-- <div class="mt-20">
+	<RecomendedHotels />
+</div> -->
 <div class="mt-20">
 	<Footer />
 </div>
