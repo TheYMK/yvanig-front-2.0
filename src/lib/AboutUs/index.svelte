@@ -14,8 +14,8 @@
 			</div>
 			<div class="flex flex-col justify-center items-center p-8">
 				<!--  -->
-				<h1 class="uppercase text-secondary font-bold text-md text-2xl">Qui Sommes-Nous</h1>
-				<p class="text-secondary mt-10 text-justify	">
+				<h1 class="uppercase text-neutral font-bold text-md text-2xl">Qui Sommes-Nous</h1>
+				<p class="text-neutral mt-10 text-justify	">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi amet placeat nemo sit
 					aliquid delectus eius accusamus, minus rem quos ut inventore voluptate minima incidunt
 					quia nulla excepturi fugit velit!

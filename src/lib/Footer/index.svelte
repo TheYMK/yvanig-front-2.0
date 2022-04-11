@@ -1,37 +1,43 @@
 <script>
-	import logo from '../../assets/logo_white.png'
+	import logo from '../../assets/logo_black.png'
 </script>
 
-<footer class="p-10 footer bg-neutral-focus text-white">
+<footer class="p-10 footer bg-white border-t-[1px] border-gray-200 text-neutral">
 	<div>
 		<span class="footer-title">Services</span>
-		<a href="/" class="link link-hover">Branding</a>
-		<a href="/" class="link link-hover">Design</a>
-		<a href="/" class="link link-hover">Marketing</a>
-		<a href="/" class="link link-hover">Advertisement</a>
+		<a href="/" class="hover:text-primary">Branding</a>
+		<a href="/" class="hover:text-primary">Design</a>
+		<a href="/" class="hover:text-primary">Marketing</a>
+		<a href="/" class="hover:text-primary">Advertisement</a>
 	</div>
 	<div>
 		<span class="footer-title">Company</span>
-		<a href="/" class="link link-hover">About us</a>
-		<a href="/" class="link link-hover">Contact</a>
-		<a href="/" class="link link-hover">Jobs</a>
-		<a href="/" class="link link-hover">Press kit</a>
+		<a href="/" class="hover:text-primary">About us</a>
+		<a href="/" class="hover:text-primary">Contact</a>
+		<a href="/" class="hover:text-primary">Jobs</a>
+		<a href="/" class="hover:text-primary">Press kit</a>
 	</div>
 	<div>
 		<span class="footer-title">Legal</span>
-		<a href="/" class="link link-hover">Terms of use</a>
-		<a href="/" class="link link-hover">Privacy policy</a>
-		<a href="/" class="link link-hover">Cookie policy</a>
+		<a href="/" class="hover:text-primary">Terms of use</a>
+		<a href="/" class="hover:text-primary">Privacy policy</a>
+		<a href="/" class="hover:text-primary">Cookie policy</a>
 	</div>
 </footer>
-<footer class="px-10 py-4 footer bg-neutral text-white">
+<footer class="px-10 py-4 footer bg-primary text-neutral">
 	<div class="items-center grid-flow-col">
 		<img src={logo} alt="logo" class="w-24" />
-		<p>Agence Yvanig <br />Copyright 2022</p>
+		<p>
+			Developed by <a
+				class="font-bold hover:text-white"
+				href="https://kaymkassai.com/"
+				target="_blank">Kaym Kassai</a
+			> <br />Copyright {new Date().getFullYear()}
+		</p>
 	</div>
 	<div class="md:place-self-center md:justify-self-end">
 		<div class="grid grid-flow-col gap-4">
-			<a href="/"
+			<a href="/" class="hover:text-white"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -43,7 +49,7 @@
 					/></svg
 				></a
 			>
-			<a href="/"
+			<a href="/" class="hover:text-white"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -55,7 +61,7 @@
 					/></svg
 				></a
 			>
-			<a href="/"
+			<a href="/" class="hover:text-white"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"

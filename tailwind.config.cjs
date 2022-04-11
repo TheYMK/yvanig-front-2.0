@@ -29,9 +29,7 @@ module.exports = {
 		themes: [
 			{
 				light_theme: {
-
 					"primary": "#fca867",
-					"primary-focus": "#ff770f",
 					"primary-focus": "#ff770f",
 					"primary-content": "#ffffff",
 
@@ -52,6 +50,30 @@ module.exports = {
 					"warning": "#96660D",
 
 					"error": "#E85A4A",
+				},
+
+				dark_theme: {
+					"primary": "#b5345b",
+					"primary-focus": "#ab1341",
+					"primary-content": "#ffffff",
+
+					"secondary": "#68ff89",
+					"secondary-focus": "#2bc44c",
+					"secondary-content": "#ffffff",
+
+					"accent": "#556ae0",
+
+					"neutral": "#1B1924",
+
+					"base-100": "#30355A",
+
+					"info": "#5D6FCB",
+
+					"success": "#10844E",
+
+					"warning": "#F6D94C",
+
+					"error": "#FA384B",
 				},
 			},
 		],

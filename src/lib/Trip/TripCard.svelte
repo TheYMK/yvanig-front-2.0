@@ -21,34 +21,34 @@
 		</div>
 		<div class="mt-4">
 			{#if trip_type === 'flight'}
-				<i class="fa-solid fa-plane-departure text-secondary text-2xl" />
+				<i class="fa-solid fa-plane-departure text-neutral text-2xl" />
 			{:else}
-				<i class="fa-solid fa-ship text-secondary text-2xl" />
+				<i class="fa-solid fa-ship text-neutral text-2xl" />
 			{/if}
 		</div>
 		<div class="mt-4">
-			<span class="text-secondary font-bold text-xs"
+			<span class="text-neutral font-bold text-xs"
 				>{start_location} <i class="fa-solid fa-arrow-right" /> {end_location}</span
 			>
 		</div>
 		<div class="grid grid-cols-2 gap-8 mt-4 place-items-center w-full">
-			<div class="text-secondary">
+			<div class="text-neutral">
 				<span class="font-bold text-xs">Départ:</span>
 				<br />
 				<span class="text-xs">{departure_date}</span>
 			</div>
-			<div class="text-secondary">
+			<div class="text-neutral">
 				<span class="font-bold text-xs">Heure:</span>
 				<br />
 				<span class="text-xs">{departure_hour}</span>
 			</div>
 			<!--  -->
-			<div class="text-secondary">
+			<div class="text-neutral">
 				<span class="font-bold text-xs">Arrivée:</span>
 				<br />
 				<span class="text-xs">{arrival_date}</span>
 			</div>
-			<div class="text-secondary">
+			<div class="text-neutral">
 				<span class="font-bold text-xs">Heure:</span>
 				<br />
 				<span class="text-xs">{arrival_hour}</span>
