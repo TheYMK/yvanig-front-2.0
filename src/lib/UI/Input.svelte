@@ -5,12 +5,13 @@
 	export let placeholder = ''
 	export let type = 'text'
 	export let inputClass = ''
+	export let disabled = false
 	export let value = ''
 </script>
 
 <div class="form-control">
 	<label class="label" for={inputId}>
-		<span class="label-text text-white font-medium"
+		<span class="label-text text-secondary font-medium"
 			>{label}
 			{#if isRequired}
 				<span class="text-red-500 ml-1">*</span>
@@ -23,15 +24,14 @@
 		{placeholder}
 		required={isRequired}
 		{value}
+		{disabled}
 		on:input
-		class={`input bg-white custom-input text-secondary ${inputClass}`}
+		class={`input input-bordered border-secondary w-full ${inputClass}`}
 	/>
 </div>
 
 <style>
 	.custom-input {
-		box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
-		border-top: solid 1px rgba(255, 255, 255, 0.1);
 		border-radius: 15px;
 	}
 </style>
