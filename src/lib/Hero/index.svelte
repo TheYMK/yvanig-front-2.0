@@ -1,5 +1,5 @@
 <script lang="ts">
-	let selectedCategory = 'trip'
+	let selectedCategory = 'flight'
 
 	let hotel_values = {
 		island: '',
@@ -10,7 +10,7 @@
 		no_room: 1
 	}
 
-	let trip_values = {
+	let flight_values = {
 		isTwoWay: false,
 		start_location: '',
 		end_location: '',
@@ -27,7 +27,7 @@
 		if (selectedCategory === 'hotel') {
 			console.log(hotel_values)
 		} else {
-			console.log(trip_values)
+			console.log(flight_values)
 		}
 	}
 </script>
@@ -37,37 +37,31 @@
 		class="container flex flex-col justify-center lg:justify-between lg:flex-row lg:items-center min-h-screen"
 	>
 		<div class="leftSide w-full">
-			<h1 class="mb-5 text-3xl md:text-4xl lg:text-5xl font-bold text-primary-content">
+			<h1 class="mb-5 text-3xl md:text-4xl lg:text-5xl font-bold text-neutral">
 				Hey! Bienvenue sur<br />Yvanig Tour
 			</h1>
-			<p class="mb-5 text-primary-content text-md">Votre plus beau voyage démarre ici !</p>
+			<p class="mb-5 text-neutral text-md">Votre plus beau voyage démarre ici !</p>
 			<button class="btn btn-primary rounded-full w-48 text-xs">Découvrir</button>
 		</div>
 		<div class="rightSide w-full hidden lg:block">
-			<div class="card w-full h-full bg-neutral reservation-card text-primary-content">
+			<div class="card w-full h-[600px] mt-20 bg-white reservation-card text-neutral">
 				<div class="card-body">
 					<h2 class="card-title uppercase">Réservez maintenant</h2>
 					<div class="flex justify-center mt-4">
-						<ul
-							class="menu bg-white text-black font-semibold menu-horizontal rounded-box p-2 w-full flex justify-center space-x-4"
-						>
-							<li
-								class="rounded"
-								class:bg-neutral={selectedCategory === 'hotel'}
-								class:text-white={selectedCategory === 'hotel'}
-								on:click={() => (selectedCategory = 'hotel')}
+						<div class="tabs gap-3">
+							<button
+								class={`tab tab-bordered border-b-4 ${
+									selectedCategory === 'flight' ? 'border-primary text-primary' : ''
+								}`}
+								on:click={() => (selectedCategory = 'flight')}>Voyage</button
 							>
-								<a href="/">Hôtel</a>
-							</li>
-							<li
-								class="rounded"
-								class:bg-neutral={selectedCategory === 'trip'}
-								class:text-white={selectedCategory === 'trip'}
-								on:click={() => (selectedCategory = 'trip')}
+							<button
+								class={`tab tab-bordered border-b-4 ${
+									selectedCategory === 'hotel' ? 'border-primary text-primary' : ''
+								}`}
+								on:click={() => (selectedCategory = 'hotel')}>Hôtel</button
 							>
-								<a href="/">Voyage</a>
-							</li>
-						</ul>
+						</div>
 					</div>
 
 					<div class="card w-full bg-white text-black text-primary-conten mt-2">
@@ -154,7 +148,7 @@
 									</div>
 								</form>
 							{/if}
-							{#if selectedCategory === 'trip'}
+							{#if selectedCategory === 'flight'}
 								<form class="space-y-4" on:submit={onSearch}>
 									<div class="flex flex-row gap-8 justify-center">
 										<div class="form-control">
@@ -164,8 +158,8 @@
 													type="radio"
 													name="waytype"
 													class="radio checked:bg-primary"
-													on:click={() => (trip_values = { ...trip_values, isTwoWay: false })}
-													checked={!trip_values.isTwoWay}
+													on:click={() => (flight_values = { ...flight_values, isTwoWay: false })}
+													checked={!flight_values.isTwoWay}
 												/>
 											</label>
 										</div>
@@ -176,14 +170,14 @@
 													type="radio"
 													name="waytype"
 													class="radio checked:bg-primary"
-													on:click={() => (trip_values = { ...trip_values, isTwoWay: true })}
-													checked={trip_values.isTwoWay}
+													on:click={() => (flight_values = { ...flight_values, isTwoWay: true })}
+													checked={flight_values.isTwoWay}
 												/>
 											</label>
 										</div>
 									</div>
 
-									{#if trip_values.isTwoWay}
+									{#if flight_values.isTwoWay}
 										<div class="grid grid-cols-2 gap-4">
 											<div class="form-control w-full">
 												<label class="label" for="island_start">
@@ -192,7 +186,7 @@
 												<select
 													id="island_start"
 													class="select w-full select-bordered"
-													bind:value={trip_values.start_location}
+													bind:value={flight_values.start_location}
 												>
 													<option disabled selected value="">Choisissez une île</option>
 													<option value="anjouan">Anjouan</option>
@@ -208,7 +202,7 @@
 												<select
 													id="island_end"
 													class="select w-full select-bordered"
-													bind:value={trip_values.end_location}
+													bind:value={flight_values.end_location}
 												>
 													<option disabled selected value="">Choisissez une île</option>
 													<option value="anjouan">Anjouan</option>
@@ -227,7 +221,7 @@
 													id="departure_date"
 													type="date"
 													class="input input-bordered w-full"
-													bind:value={trip_values.departure_date}
+													bind:value={flight_values.departure_date}
 												/>
 											</div>
 											<div class="form-control w-full">
@@ -238,7 +232,7 @@
 													id="return_date"
 													type="date"
 													class="input input-bordered w-full"
-													bind:value={trip_values.return_date}
+													bind:value={flight_values.return_date}
 												/>
 											</div>
 										</div>
@@ -252,7 +246,7 @@
 													type="number"
 													min="1"
 													class="input input-bordered w-full"
-													bind:value={trip_values.no_adults}
+													bind:value={flight_values.no_adults}
 												/>
 											</div>
 											<div class="form-control w-full">
@@ -264,7 +258,7 @@
 													type="number"
 													min="0"
 													class="input input-bordered w-full"
-													bind:value={trip_values.no_children}
+													bind:value={flight_values.no_children}
 												/>
 											</div>
 											<div class="form-control w-full">
@@ -276,7 +270,7 @@
 													type="number"
 													min="0"
 													class="input input-bordered w-full"
-													bind:value={trip_values.no_baby}
+													bind:value={flight_values.no_baby}
 												/>
 											</div>
 										</div>
@@ -289,7 +283,7 @@
 												<select
 													id="island_start"
 													class="select w-full select-bordered"
-													bind:value={trip_values.start_location}
+													bind:value={flight_values.start_location}
 												>
 													<option disabled selected value="">Choisissez une île</option>
 													<option value="anjouan">Anjouan</option>
@@ -305,7 +299,7 @@
 												<select
 													id="island_end"
 													class="select w-full select-bordered"
-													bind:value={trip_values.end_location}
+													bind:value={flight_values.end_location}
 												>
 													<option disabled selected value="">Choisissez une île</option>
 													<option value="anjouan">Anjouan</option>
@@ -324,7 +318,7 @@
 													id="departure_date"
 													type="date"
 													class="input input-bordered w-full"
-													bind:value={trip_values.departure_date}
+													bind:value={flight_values.departure_date}
 												/>
 											</div>
 										</div>
@@ -338,7 +332,7 @@
 													type="number"
 													min="1"
 													class="input input-bordered w-full"
-													bind:value={trip_values.no_adults}
+													bind:value={flight_values.no_adults}
 												/>
 											</div>
 											<div class="form-control w-full">
@@ -350,7 +344,7 @@
 													type="number"
 													min="0"
 													class="input input-bordered w-full"
-													bind:value={trip_values.no_children}
+													bind:value={flight_values.no_children}
 												/>
 											</div>
 											<div class="form-control w-full">
@@ -362,7 +356,7 @@
 													type="number"
 													min="0"
 													class="input input-bordered w-full"
-													bind:value={trip_values.no_baby}
+													bind:value={flight_values.no_baby}
 												/>
 											</div>
 										</div>
@@ -384,9 +378,9 @@
 
 <style>
 	.background-image {
-		background-image: linear-gradient(360deg, #008080 0%, rgba(255, 18, 250, 0) 10%),
+		background-image: linear-gradient(360deg, var(--color-base-100) 0%, rgba(255, 18, 250, 0) 10%),
 			url('/src/assets/bg/bg_hero.png');
-		background-color: #008080;
+		background-color: var(--color-base-100);
 		background-repeat: no-repeat;
 		background-size: cover;
 	}
