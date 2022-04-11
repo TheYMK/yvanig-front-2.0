@@ -32,14 +32,16 @@
 		}
 
 		try {
-			await api.sendEmailVerification(data.email)
-			notificationCenter.displaySuccessNotification('Un email de vérification vous a été envoyé.')
+			await api.sendPasswordResetEmail(data.email)
+			notificationCenter.displaySuccessNotification(
+				'Un lien de réinitialisation de mot de passe vous a été envoyé.'
+			)
 			loading = false
 		} catch (err) {
 			loading = false
 			if (err.response?.data?.statusCode === 400) {
 				notificationCenter.displayErrorNotification(
-					"Nous n'avons pas pu vous envoyer un email de vérification. Veuillez réessayer plus tard."
+					"Nous n'avons pas pu vous envoyer un lien de réinitialisation. Veuillez réessayer plus tard."
 				)
 			} else {
 				notificationCenter.displayErrorNotification('Une erreur est survenue.')
@@ -53,7 +55,7 @@
 	<div class="flex justify-center items-center h-full">
 		<div class="auth-card bg-white w-[400px] h-[350px] md:rounded-[15px] p-8">
 			<div id="title" class="text-center">
-				<h1 class="font-bold text-secondary">S'enregistrer</h1>
+				<h1 class="font-bold text-secondary">Réinitialiser votre mot de passe</h1>
 			</div>
 			<div id="form" class="mt-10">
 				<form class="space-y-4">
@@ -71,7 +73,7 @@
 						<button
 							disabled={!data.email || error.length > 0}
 							on:click={onSubmit}
-							class="btn btn-primary rounded-full w-48 text-xs mt-4"
+							class="btn btn-primary rounded-full w-full text-xs mt-4"
 						>
 							{#if loading}
 								<div class="animate-spin">
@@ -93,7 +95,7 @@
 									</svg>
 								</div>
 							{:else}
-								<span>S'enregistrer</span>
+								<span>Envoyer le lien de réinitialisation</span>
 							{/if}
 						</button>
 						{#if error}
@@ -107,7 +109,7 @@
 						<a
 							href="/auth/login"
 							class="text-secondary text-xs hover:text-primary hover:font-bold underline"
-							>Vous avez déjà un compte ? Connectez-vous</a
+							><i class="fa-solid fa-circle-arrow-left" /> Retour</a
 						>
 					</div>
 				</form>

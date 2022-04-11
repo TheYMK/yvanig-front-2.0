@@ -2,74 +2,126 @@
 	import Navbar from '$lib/Navbar/index.svelte'
 	import Footer from '$lib/Footer/index.svelte'
 	import Input from '$lib/UI/Input.svelte'
+	import { page } from '$app/stores'
+	import { onMount } from 'svelte'
+	import jwt_decode from 'jwt-decode'
 	import { notificationCenter } from '../../../config/notification'
-	import { isEmailValid } from '../../../config/helpers'
 	import { api } from '../../../api/Api'
+	import { goto } from '$app/navigation'
 
 	let data = {
-		email: ''
+		newPassword: '',
+		token: ''
 	}
-
+	let email = ''
+	let repeat_password = ''
 	let error = ''
 	let loading = false
 
-	const onEmailChange = (e: any) => {
-		data.email = e.target.value
-		if (!isEmailValid(data.email)) {
-			error = 'Veuillez renseigner un email valide.'
+	$: if (data.newPassword !== repeat_password) {
+		error = 'Les mots de passe ne correspondent pas.'
+	} else {
+		error = ''
+	}
+
+	const onPasswordChange = (e: any) => {
+		data.newPassword = e.target.value
+		if (data.newPassword.length < 6) {
+			error = 'Votre mot de passe doit contenir au moins 8 caractères.'
 		} else {
 			error = ''
 		}
 	}
 
 	const onSubmit = async (e: any) => {
-		e.preventDefault()
 		loading = true
-		if (!data.email || error) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner votre email.')
+		e.preventDefault()
+
+		if (!data.newPassword || !data.token) {
+			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.')
 			loading = false
 			return
 		}
 
 		try {
-			await api.sendEmailVerification(data.email)
-			notificationCenter.displaySuccessNotification('Un email de vérification vous a été envoyé.')
+			await api.passwordReset(data)
+			notificationCenter.displaySuccessNotification('Votre mot de passe a bien été modifié.')
 			loading = false
+			goto('/')
 		} catch (err) {
 			loading = false
 			if (err.response?.data?.statusCode === 400) {
 				notificationCenter.displayErrorNotification(
-					"Nous n'avons pas pu vous envoyer un email de vérification. Veuillez réessayer plus tard."
+					"Nous n'avons pas pu modifier votre mot de passe. Veuillez réessayer plus tard."
+				)
+			} else if (err.response?.data?.statusCode === 404) {
+				notificationCenter.displayErrorNotification(
+					"Nous n'avons pas pu trouver votre compte. Veuillez réessayer plus tard."
 				)
 			} else {
 				notificationCenter.displayErrorNotification('Une erreur est survenue.')
 			}
 		}
 	}
+	onMount(() => {
+		data.token = $page.url.searchParams.get('token')
+		// @ts-ignore
+		email = jwt_decode(data.token).email
+	})
 </script>
 
 <Navbar />
 <div class="bg-neutral h-screen lg:px-16">
 	<div class="flex justify-center items-center h-full">
-		<div class="auth-card bg-white w-[400px] h-[350px] md:rounded-[15px] p-8">
+		<div class="auth-card bg-white w-[500px] h-fit md:rounded-[15px] p-8 mt-52 lg:mt-0">
 			<div id="title" class="text-center">
-				<h1 class="font-bold text-secondary">S'enregistrer</h1>
+				<h1 class="font-bold text-secondary">Réinitialiser votre mot de passe</h1>
 			</div>
 			<div id="form" class="mt-10">
-				<form class="space-y-4">
-					<Input
-						label="Adresse email"
-						isRequired
-						inputId="email"
-						type="email"
-						placeholder="johndoe@xxxx.xxx"
-						value={data.email}
-						on:input={onEmailChange}
-					/>
+				<form class="grid grid-cols-2 gap-8">
+					<div class="col-span-2">
+						<Input
+							label="Adresse email"
+							isRequired
+							disabled
+							inputId="email"
+							type="email"
+							value={email}
+							on:input={(e) => {
+								// @ts-ignore
+								data.last_name = e.target.value
+							}}
+						/>
+					</div>
+					<div class="col-span-2 lg:col-span-1">
+						<Input
+							label="Nouveau mot de passe"
+							isRequired
+							inputId="password"
+							type="password"
+							placeholder="•••••••••"
+							value={data.newPassword}
+							on:input={onPasswordChange}
+						/>
+					</div>
+					<div class="col-span-2 lg:col-span-1">
+						<Input
+							label="Confirmer le mot de passe"
+							isRequired
+							inputId="repeat_password"
+							type="password"
+							placeholder="•••••••••"
+							value={repeat_password}
+							on:input={(e) => {
+								// @ts-ignore
+								repeat_password = e.target.value
+							}}
+						/>
+					</div>
 
-					<div class="text-center">
+					<div class="text-center col-span-2">
 						<button
-							disabled={!data.email || error.length > 0}
+							disabled={data.newPassword === '' || data.newPassword !== repeat_password}
 							on:click={onSubmit}
 							class="btn btn-primary rounded-full w-48 text-xs mt-4"
 						>
@@ -93,29 +145,21 @@
 									</svg>
 								</div>
 							{:else}
-								<span>S'enregistrer</span>
+								<span>Réinitialiser</span>
 							{/if}
 						</button>
 						{#if error}
-							<div>
-								<p class="text-red-600 text-xs mt-4">{error}</p>
+							<div class="col-span-2 mt-4">
+								<p class="text-red-600 text-xs">{error}</p>
 							</div>
 						{/if}
-					</div>
-
-					<div class="text-center">
-						<a
-							href="/auth/login"
-							class="text-secondary text-xs hover:text-primary hover:font-bold underline"
-							>Vous avez déjà un compte ? Connectez-vous</a
-						>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="mt-20">
+<div class="mt-36 lg:mt-20">
 	<Footer />
 </div>
 
