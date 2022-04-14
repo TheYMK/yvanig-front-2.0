@@ -1,4 +1,5 @@
 <script lang="ts">
+	import userStore from '../../stores/user'
 	import logo from '../../assets/logo_black.png'
 
 	export let sticky = false
@@ -21,7 +22,7 @@
 	id="navbar"
 	class={y >= 50
 		? `flex flex-col justify-center bg-primary w-full z-50 top-0 px-8 lg:px-16 shadow-lg`
-		: `flex flex-col justify-center w-full z-50 top-0 px-8 lg:px-16`}
+		: `flex flex-col justify-center w-full z-50 top-0 px-8 lg:px-16 ${sticky ? 'bg-primary' : ''}`}
 	class:sticky
 	class:fixed={!sticky}
 >
@@ -77,7 +78,7 @@
 						<a
 							href="/"
 							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
-								y <= 50 && !isMobileMenuOpen ? 'hover:text-primary' : 'hover:text-white'
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}
 						>
 							Accueil
@@ -85,7 +86,7 @@
 						<a
 							href="/discover"
 							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
-								y <= 50 && !isMobileMenuOpen ? 'hover:text-primary' : 'hover:text-white'
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}
 						>
 							Découvrir
@@ -93,7 +94,7 @@
 						<a
 							href="/"
 							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
-								y <= 50 && !isMobileMenuOpen ? 'hover:text-primary' : 'hover:text-white'
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}
 						>
 							Réservation
@@ -101,18 +102,81 @@
 						<a
 							href="/"
 							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
-								y <= 50 && !isMobileMenuOpen ? 'hover:text-primary' : 'hover:text-white'
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}
 						>
 							Contactez-nous
 						</a>
 						<div class="lg:ml-5">
-							<a
-								href="/auth/login"
-								class={`btn rounded-full btn-sm text-xs w-40 border-none ${
-									y <= 50 && !isMobileMenuOpen ? 'btn-primary' : 'bg-white hover:bg-white'
-								}`}>Se Connecter</a
-							>
+							{#if $userStore}
+								{#if $userStore.role === 'sysadmin'}
+									<div class="dropdown dropdown-end dropdown-hover">
+										<div
+											tabindex="0"
+											class={`btn rounded-full btn-sm text-xs w-40 border-none ${
+												y <= 50 && !isMobileMenuOpen && !sticky
+													? 'btn-primary'
+													: 'bg-white hover:bg-white'
+											}`}
+										>
+											Mon compte
+										</div>
+										<ul
+											tabindex="0"
+											class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52"
+										>
+											<li>
+												<a href="/admin/account" class="hover:bg-primary hover:text-white"
+													>Tableau de bord</a
+												>
+											</li>
+											<li>
+												<a href="/auth/signout" class="hover:bg-primary hover:text-white"
+													>Déconnexion</a
+												>
+											</li>
+										</ul>
+									</div>
+								{:else}
+									<div class="dropdown dropdown-end dropdown-hover">
+										<div
+											tabindex="0"
+											href="/user/account"
+											class={`btn rounded-full btn-sm text-xs w-40 border-none ${
+												y <= 50 && !isMobileMenuOpen && !sticky
+													? 'btn-primary'
+													: 'bg-white hover:bg-white'
+											}`}
+										>
+											Mon compte
+										</div>
+										<ul
+											tabindex="0"
+											class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52"
+										>
+											<li>
+												<a href="/user/account" class="hover:bg-primary hover:text-white"
+													>Mon Profil</a
+												>
+											</li>
+											<li>
+												<a href="/auth/signout" class="hover:bg-primary hover:text-white"
+													>Déconnexion</a
+												>
+											</li>
+										</ul>
+									</div>
+								{/if}
+							{:else}
+								<a
+									href="/auth/login"
+									class={`btn rounded-full btn-sm text-xs w-40 border-none ${
+										y <= 50 && !isMobileMenuOpen && !sticky
+											? 'btn-primary'
+											: 'bg-white hover:bg-white'
+									}`}>Se Connecter</a
+								>
+							{/if}
 						</div>
 					</div>
 				</div>

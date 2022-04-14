@@ -11,7 +11,7 @@
 
 <div class="form-control">
 	<label class="label" for={inputId}>
-		<span class="label-text text-secondary font-medium"
+		<span class="label-text text-neutral font-medium"
 			>{label}
 			{#if isRequired}
 				<span class="text-red-500 ml-1">*</span>
@@ -26,7 +26,7 @@
 		{value}
 		{disabled}
 		on:input
-		class={`input input-bordered border-secondary w-full ${inputClass}`}
+		class={`input input-bordered border-neutral w-full ${inputClass}`}
 	/>
 </div>
 

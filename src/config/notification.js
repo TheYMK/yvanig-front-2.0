@@ -1,16 +1,20 @@
 import { toast } from '@zerodevx/svelte-toast'
 
-const SUCCESS_COLOR = '#48BB78'
-const ERROR_COLOR = '#F56565'
-const WARNING_COLOR = '#ffa200'
-const INFO_COLOR = '#0077ff'
+const SUCCESS_COLOR = 'var(--color-success)'
+const SUCCESS_BAR_COLOR = 'var(--color-success-bar)'
+const ERROR_COLOR = 'var(--color-error)'
+const ERROR_BAR_COLOR = 'var(--color-error-bar)'
+const WARNING_COLOR = 'var(--color-warning)'
+const WARNING_BAR_COLOR = 'var(--color-warning-bar)'
+const INFO_COLOR = 'var(--color-info)'
+const INFO_BAR_COLOR = 'var(--color-info-bar)'
 
 class NotificationCenter {
   displaySuccessNotification(msg) {
     toast.push(msg, {
       theme: {
-        '--toastBackground': '#48BB78',
-        '--toastBarBackground': '#2F855A'
+        '--toastBackground': SUCCESS_COLOR,
+        '--toastBarBackground': SUCCESS_BAR_COLOR
       }
     })
   }
@@ -18,8 +22,8 @@ class NotificationCenter {
   displayErrorNotification(msg) {
     toast.push(msg, {
       theme: {
-        '--toastBackground': '#F56565',
-        '--toastBarBackground': '#C1272D'
+        '--toastBackground': ERROR_COLOR,
+        '--toastBarBackground': ERROR_BAR_COLOR
       }
     })
   }
@@ -27,8 +31,8 @@ class NotificationCenter {
   displayWarningNotification(msg) {
     toast.push(msg, {
       theme: {
-        '--toastBackground': '#ffa200',
-        '--toastBarBackground': '#C1272D'
+        '--toastBackground': WARNING_COLOR,
+        '--toastBarBackground': WARNING_BAR_COLOR
       }
     })
   }
@@ -36,8 +40,8 @@ class NotificationCenter {
   displayInfoNotification(msg) {
     toast.push(msg, {
       theme: {
-        '--toastBackground': '#0077ff',
-        '--toastBarBackground': '#C1272D'
+        '--toastBackground': INFO_COLOR,
+        '--toastBarBackground': INFO_BAR_COLOR
       }
     })
   }

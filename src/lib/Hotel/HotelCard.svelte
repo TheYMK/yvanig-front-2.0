@@ -28,23 +28,23 @@
 		<div class="">
 			<!-- title -->
 			<a href="/">
-				<h4 class="text-secondary font-bold">{hotelName}</h4>
+				<h4 class="text-neutral font-bold">{hotelName}</h4>
 			</a>
 			<!-- description -->
-			<div class="text-secondary text-md">
+			<div class="text-neutral text-md">
 				<span>{hotelDescription && hotelDescription.substring(0, 50)}...</span>
 			</div>
 		</div>
 		<div class="flex flex-col">
 			<div class="flex flex-row justify-end">
-				<h2 class="text-secondary font-bold">{hotelPrice} KMF / nuit</h2>
+				<h2 class="text-neutral font-bold">{hotelPrice} KMF / nuit</h2>
 			</div>
 			<div class="flex flex-row justify-between items-center mt-4">
 				<div class="">
 					<button class="btn btn-primary rounded w-36 text-xs">Reserver</button>
 				</div>
 				<div class="">
-					<i class="fa fa-star active text-yellow-400" /><span class="text-secondary text-sm ml-2"
+					<i class="fa fa-star active text-yellow-400" /><span class="text-neutral text-sm ml-2"
 						>{hotelRating}</span
 					>
 				</div>
