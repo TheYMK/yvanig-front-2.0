@@ -1,5 +1,6 @@
 <script lang="ts">
-	import logo from '../../assets/logo_white.png'
+	import userStore from '../../stores/user'
+	import logo from '../../assets/logo_black.png'
 
 	export let sticky = false
 	let isMobileMenuOpen = false
@@ -20,15 +21,15 @@
 <nav
 	id="navbar"
 	class={y >= 50
-		? `flex flex-col justify-center bg-neutral text-neutral-content w-full z-50 top-0 px-8 lg:px-16 shadow-lg`
-		: `flex flex-col justify-center text-neutral-content w-full z-50 top-0 px-8 lg:px-16`}
+		? `flex flex-col justify-center bg-primary w-full z-50 top-0 px-8 lg:px-16 shadow-lg`
+		: `flex flex-col justify-center w-full z-50 top-0 px-8 lg:px-16 ${sticky ? 'bg-primary' : ''}`}
 	class:sticky
 	class:fixed={!sticky}
 >
 	<div class="container flex flex-row justify-between items-center">
 		<div
 			id="left-side"
-			class="flex flex-row items-center tooltip tooltip-bottom"
+			class="flex flex-row items-center tooltip tooltip-bottom tooltip-primary"
 			data-tip="Accueil"
 			on:click={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
 		>
@@ -38,12 +39,9 @@
 		</div>
 		<div id="right-side" class="flex flex-row items-center">
 			<div class="block lg:hidden">
-				<button
-					on:click={() => onMobileMenuOpen()}
-					class="flex items-center color-accent py-4 ml-4"
-				>
+				<button on:click={() => onMobileMenuOpen()} class="flex items-center py-4 ml-4">
 					<svg
-						class="h-8 w-8 hover:text-primary"
+						class={`h-8 w-8 ${y <= 50 ? 'hover:text-primary' : 'hover:text-white'}`}
 						fill="currentColor"
 						viewBox="0 0 20 20"
 						xmlns="http://www.w3.org/2000/svg"
@@ -58,15 +56,15 @@
 			</div>
 			<div
 				class:hidden={!isMobileMenuOpen}
-				class="bg-neutral hidden absolute w-full h-screen left-0 top-0 flex-grow lg:flex lg:items-center lg:static lg:bg-transparent lg:w-auto lg:h-auto lg:visible"
+				class="bg-primary hidden absolute w-full h-screen left-0 top-0 flex-grow lg:flex lg:items-center lg:static lg:bg-transparent lg:w-auto lg:h-auto lg:visible"
 			>
 				<div
-					class="container font-medium text-30 text-white text-center flex flex-col lg:flex-grow lg:mx-auto lg:flex-row lg:justify-end "
+					class="container font-medium text-30  text-center flex flex-col lg:flex-grow lg:mx-auto lg:flex-row lg:justify-end "
 				>
 					<button
 						on:click={() => onMobileMenuClose()}
 						class:hidden={!isMobileMenuOpen}
-						class="lg:hidden w-fit-content py-10 px-6 self-end"
+						class="lg:hidden w-fit-content py-10 px-6 self-end hover:text-white"
 					>
 						<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
 							<path
@@ -79,32 +77,106 @@
 					<div class="flex flex-col items-center lg:flex-row">
 						<a
 							href="/"
-							class="hover:text-primary text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5"
+							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
+							}`}
 						>
 							Accueil
 						</a>
 						<a
 							href="/discover"
-							class="hover:text-primary text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5"
+							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
+							}`}
 						>
 							Découvrir
 						</a>
 						<a
 							href="/"
-							class="hover:text-primary text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5"
+							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
+							}`}
 						>
 							Réservation
 						</a>
 						<a
 							href="/"
-							class="hover:text-primary text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5"
+							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
+								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
+							}`}
 						>
 							Contactez-nous
 						</a>
 						<div class="lg:ml-5">
-							<a href="/auth/login" class="btn rounded-full btn-sm text-xs btn-primary w-40"
-								>Se Connecter</a
-							>
+							{#if $userStore}
+								{#if $userStore.role === 'sysadmin'}
+									<div class="dropdown dropdown-end dropdown-hover">
+										<div
+											tabindex="0"
+											class={`btn rounded-full btn-sm text-xs w-40 border-none ${
+												y <= 50 && !isMobileMenuOpen && !sticky
+													? 'btn-primary'
+													: 'bg-white hover:bg-white'
+											}`}
+										>
+											Mon compte
+										</div>
+										<ul
+											tabindex="0"
+											class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52"
+										>
+											<li>
+												<a href="/admin/account" class="hover:bg-primary hover:text-white"
+													>Tableau de bord</a
+												>
+											</li>
+											<li>
+												<a href="/auth/signout" class="hover:bg-primary hover:text-white"
+													>Déconnexion</a
+												>
+											</li>
+										</ul>
+									</div>
+								{:else}
+									<div class="dropdown dropdown-end dropdown-hover">
+										<div
+											tabindex="0"
+											href="/user/account"
+											class={`btn rounded-full btn-sm text-xs w-40 border-none ${
+												y <= 50 && !isMobileMenuOpen && !sticky
+													? 'btn-primary'
+													: 'bg-white hover:bg-white'
+											}`}
+										>
+											Mon compte
+										</div>
+										<ul
+											tabindex="0"
+											class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52"
+										>
+											<li>
+												<a href="/user/account" class="hover:bg-primary hover:text-white"
+													>Mon Profil</a
+												>
+											</li>
+											<li>
+												<a href="/auth/signout" class="hover:bg-primary hover:text-white"
+													>Déconnexion</a
+												>
+											</li>
+										</ul>
+									</div>
+								{/if}
+							{:else}
+								<a
+									href="/auth/login"
+									class={`btn rounded-full btn-sm text-xs w-40 border-none ${
+										y <= 50 && !isMobileMenuOpen && !sticky
+											? 'btn-primary'
+											: 'bg-white hover:bg-white'
+									}`}>Se Connecter</a
+								>
+							{/if}
 						</div>
 					</div>
 				</div>

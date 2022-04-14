@@ -12,8 +12,9 @@ export class HttpClient {
       baseURL: BASE_URL,
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
+        "Accept": "application/json",
+      },
+      withCredentials: true
     });
   }
 

@@ -6,25 +6,28 @@
 	import RecomendedHotels from '$lib/Hotel/RecomendedHotels.svelte'
 	import AboutUs from '$lib/AboutUs/index.svelte'
 	import RecentTrips from '$lib/Trip/RecentTrips.svelte'
+	import Layout from '$lib/Layout.svelte'
 </script>
 
-<Navbar />
-<Hero />
-<div class="mt-14">
-	<Island />
-</div>
-<div class="mt-20">
-	<RecentTrips />
-</div>
-<div class="mt-20">
-	<AboutUs />
-</div>
-<!-- <div class="mt-20">
-	<RecomendedHotels />
-</div> -->
-<div class="mt-20">
-	<Footer />
-</div>
+<Layout>
+	<Navbar />
+	<Hero />
+	<div class="mt-14">
+		<Island />
+	</div>
+	<div class="mt-20">
+		<RecentTrips />
+	</div>
+	<div class="mt-20">
+		<AboutUs />
+	</div>
+	<!-- <div class="mt-20">
+		<RecomendedHotels />
+	</div> -->
+	<div class="mt-20">
+		<Footer />
+	</div>
+</Layout>
 
 <style>
 	/* your styles go here */

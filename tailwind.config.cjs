@@ -28,34 +28,55 @@ module.exports = {
 	daisyui: {
 		themes: [
 			{
-				yvanigtheme_light: {
-					primary: '#ff5f46' /* Primary color */,
-					'primary-focus': '#fc492d' /* Primary color - focused */,
-					'primary-content': '#ffffff' /* Foreground content color to use on primary color */,
-					secondary: '#14263B',
-					'secondary-focus': '#3D89F6',
-					'secondary-content': '#ffffff',
-					accent: '#37cdbe',
-					'accent-focus': '#2aa79b',
-					'accent-content': '#ffffff',
-					neutral: '#008080' /* Neutral color */,
-					'neutral-focus': '#0f9494' /* Neutral color - focused */,
-					'neutral-content': '#ffffff' /* Foreground content color to use on neutral color */,
-					'base-100': '#ffffff',
-					'base-200': '#f9fafb',
-					'base-300': '#d1d5db',
-					'base-content': '#1f2937',
-					info: '#e0f2fe',
-					'info-content': '#2563eb',
-					success: '#dcfce7',
-					'success-content': '#16a34a',
-					warning: '#fef3c7',
-					'warning-content': '#d97706',
-					error: '#fee2e2',
-					'error-content': '#dc2626'
-				}
-			}
-		]
+				light_theme: {
+					"primary": "#fca867",
+					"primary-focus": "#ff770f",
+					"primary-content": "#ffffff",
+
+					"secondary": "#fc5855",
+					"secondary-focus": "#ff770f",
+					"secondary-content": "#ffffff",
+
+					"accent": "#9661ed",
+
+					"neutral": "#1D1821",
+
+					"base-100": "#FFFFFF",
+
+					"info": "#7BB1EA",
+
+					"success": "#0F7046",
+
+					"warning": "#96660D",
+
+					"error": "#E85A4A",
+				},
+
+				dark_theme: {
+					"primary": "#b5345b",
+					"primary-focus": "#ab1341",
+					"primary-content": "#ffffff",
+
+					"secondary": "#68ff89",
+					"secondary-focus": "#2bc44c",
+					"secondary-content": "#ffffff",
+
+					"accent": "#556ae0",
+
+					"neutral": "#1B1924",
+
+					"base-100": "#30355A",
+
+					"info": "#5D6FCB",
+
+					"success": "#10844E",
+
+					"warning": "#F6D94C",
+
+					"error": "#FA384B",
+				},
+			},
+		],
 	},
 	plugins: [require('daisyui')]
 }

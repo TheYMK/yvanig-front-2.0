@@ -25,6 +25,15 @@ class Api {
   async passwordReset(data) {
     return this.httpClient.post('/auth/password-reset', data)
   }
+
+
+  async getCurrentuser() {
+    return this.httpClient.get('/auth/whoami')
+  }
+
+  async signout() {
+    return this.httpClient.post('/auth/signout')
+  }
 }
 
 export const api = new Api()

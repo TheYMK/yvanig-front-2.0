@@ -26,8 +26,11 @@
 	]
 </script>
 
-<div class="bg-neutral-focus h-[300px] flex flex-col justify-center items-center">
-	<h1 class="text-white uppercase font-bold text-3xl lg:text-6xl">Découvrir</h1>
+<div
+	class="bg-white h-[300px] border-b-[1px] border-gray-200 flex flex-col justify-center items-center"
+>
+	<h1 class="text-neutral uppercase font-bold text-3xl lg:text-6xl">Découvrir</h1>
+	<div class="h-[5px] mt-2 bg-primary w-48" />
 </div>
 <div class="px-8 lg:px-16">
 	<div class="container">
