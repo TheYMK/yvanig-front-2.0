@@ -7,6 +7,7 @@
 	export let inputClass = ''
 	export let disabled = false
 	export let value = ''
+	export let min = 0
 </script>
 
 <div class="form-control">
@@ -25,6 +26,7 @@
 		required={isRequired}
 		{value}
 		{disabled}
+		{min}
 		on:input
 		class={`input input-bordered border-neutral w-full ${inputClass}`}
 	/>

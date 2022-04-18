@@ -6,6 +6,8 @@ class Api {
     this.httpClient = new HttpClient();
   }
 
+  // USER
+
   async sendEmailVerification(email) {
     return this.httpClient.post('/auth/send-email-verification', { email })
   }
@@ -33,6 +35,25 @@ class Api {
 
   async signout() {
     return this.httpClient.post('/auth/signout')
+  }
+
+  // FLIGHT
+
+  async getFlights(page = 0, limit = 10) {
+    return this.httpClient.get(`/flights?page=${page}&limit=${limit}`)
+  }
+
+  async createFlight(data) {
+    return this.httpClient.post('/flights', data)
+  }
+
+  // Cloudinary
+  async uploadImage(image) {
+    return this.httpClient.post('/cloudinary/upload', { image })
+  }
+
+  async removeImage(public_id) {
+    return this.httpClient.post('/cloudinary/remove', { public_id })
   }
 }
 
