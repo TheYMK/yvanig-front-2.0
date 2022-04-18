@@ -47,7 +47,15 @@ class Api {
     return this.httpClient.post('/flights', data)
   }
 
-  // Cloudinary
+  async getFlight(id) {
+    return this.httpClient.get(`/flights/${id}`)
+  }
+
+  async removeFlight(id) {
+    return this.httpClient.delete(`/flights/${id}`)
+  }
+
+  // CLOUDINARY
   async uploadImage(image) {
     return this.httpClient.post('/cloudinary/upload', { image })
   }

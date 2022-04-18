@@ -138,7 +138,7 @@
 					<div
 						class="mb-8 rounded-box w-28 h-28 ring ring-primary ring-offset-base-100 ring-offset-2"
 					>
-						<img src={image.url} alt="hotel image" />
+						<img src={image.url} alt="" />
 					</div>
 				</div>
 			{/each}

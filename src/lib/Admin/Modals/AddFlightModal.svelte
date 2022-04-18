@@ -6,7 +6,7 @@
 	import { FlightStatuses } from '../../../config/constants'
 	import { api } from '../../../api/Api'
 
-	export let isModalOpened = false
+	export let isAddFlightModalOpened = false
 	export let reloadFlight = null
 
 	export let data = {
@@ -68,7 +68,7 @@
 		try {
 			await api.createFlight(data)
 			notificationCenter.displaySuccessNotification('Votre vol a bien été créé.')
-			isModalOpened = false
+			isAddFlightModalOpened = false
 			data = {
 				airline: '',
 				flight_number: '',
@@ -105,12 +105,12 @@
 	}
 </script>
 
-<div class="modal modal-bottom lg:modal-middle" class:modal-open={isModalOpened}>
+<div class="modal modal-bottom lg:modal-middle" class:modal-open={isAddFlightModalOpened}>
 	<div class="modal-box relative w-full">
 		<label
 			for="my-modal-3"
 			class="btn btn-sm btn-neutral text-white btn-circle absolute right-2 top-2"
-			on:click={() => (isModalOpened = false)}>✕</label
+			on:click={() => (isAddFlightModalOpened = false)}>✕</label
 		>
 		<h3 class="text-lg font-bold">Ajouter un nouveau vol</h3>
 		<div class="py-4">

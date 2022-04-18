@@ -3,13 +3,16 @@
 	import { onMount } from 'svelte'
 	import { api } from '../../../api/Api'
 	import AddFlightModal from '../Modals/AddFlightModal.svelte'
+	import ViewFlightModal from '../Modals/ViewFlightModal.svelte'
 
 	let flights = []
 	let total = 0
 	let page = 0
 	let limit = 10
 	let loading = false
-	let isModalOpened = false
+	let isAddFlightModalOpened = false
+	let isViewFlightModalOpened = false
+	let selectedFlight = null
 
 	const loadFlights = async (page: any, limit: any) => {
 		loading = true
@@ -49,7 +52,9 @@
 	</div>
 
 	<div class="flex justify-center mt-10">
-		<button class="btn btn-primary" on:click={() => (isModalOpened = true)}>Ajouter un vol</button>
+		<button class="btn btn-primary" on:click={() => (isAddFlightModalOpened = true)}
+			>Ajouter un vol</button
+		>
 	</div>
 
 	<div class="mt-20">
@@ -106,7 +111,13 @@
 									>
 								</td>
 								<th>
-									<button class="btn btn-primary btn-xs">Afficher</button>
+									<button
+										class="btn btn-primary btn-xs"
+										on:click={() => {
+											selectedFlight = flight
+											isViewFlightModalOpened = true
+										}}>Afficher</button
+									>
 								</th>
 							</tr>
 						{/each}
@@ -144,7 +155,8 @@
 		{/if}
 	</div>
 </div>
-<AddFlightModal bind:isModalOpened {reloadFlight} />
+<AddFlightModal bind:isAddFlightModalOpened {reloadFlight} />
+<ViewFlightModal bind:isViewFlightModalOpened bind:selectedFlight {reloadFlight} />
 
 <style>
 	.table th:first-child {
