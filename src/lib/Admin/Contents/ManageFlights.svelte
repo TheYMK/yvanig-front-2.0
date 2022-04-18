@@ -4,6 +4,7 @@
 	import { api } from '../../../api/Api'
 	import AddFlightModal from '../Modals/AddFlightModal.svelte'
 	import ViewFlightModal from '../Modals/ViewFlightModal.svelte'
+	import GenericHero from '$lib/UI/GenericHero.svelte'
 
 	let flights = []
 	let total = 0
@@ -46,16 +47,18 @@
 </script>
 
 <div class="text-neutral">
-	<div class="flex flex-col items-center">
-		<h1 class="text-2xl font-bold">Gestion des vols</h1>
-		<div class="h-[5px] mt-2 bg-primary w-36" />
-	</div>
-
-	<div class="flex justify-center mt-10">
-		<button class="btn btn-primary" on:click={() => (isAddFlightModalOpened = true)}
-			>Ajouter un vol</button
-		>
-	</div>
+	<GenericHero
+		title="Gestion des vols"
+		titleClassName="text-xl lg:text-4xl"
+		separatorClassName="w-48"
+		containerClassName="h-[200px]"
+	>
+		<div slot="action" class="mt-10">
+			<button class="btn btn-primary" on:click={() => (isAddFlightModalOpened = true)}
+				>Ajouter un vol</button
+			>
+		</div>
+	</GenericHero>
 
 	<div class="mt-20">
 		<div>

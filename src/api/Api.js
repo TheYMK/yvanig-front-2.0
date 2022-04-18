@@ -55,7 +55,12 @@ class Api {
     return this.httpClient.delete(`/flights/${id}`)
   }
 
+  async updateFlight(data) {
+    return this.httpClient.patch(`/flights/${data.id}`, data)
+  }
+
   // CLOUDINARY
+
   async uploadImage(image) {
     return this.httpClient.post('/cloudinary/upload', { image })
   }
