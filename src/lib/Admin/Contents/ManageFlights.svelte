@@ -68,7 +68,7 @@
 		<div class="mt-10">
 			<p class="text-sm">Resultat: {flights.length} / {total} trouvés</p>
 		</div>
-		{#if flights.length < 0}
+		{#if flights.length === 0}
 			<div class="text-center">
 				<p>Aucun vol n'a été trouvé</p>
 			</div>
@@ -100,14 +100,14 @@
 									</div>
 								</td>
 								<td>
-									{flight.origin_airport_name} ({flight.origin})
+									{flight.origin} ( {flight.origin_airport_code} )
 									<br />
 									<span class="badge badge-ghost badge-sm"
 										>{flight.departure_date} ( {flight.departure_time} )</span
 									>
 								</td>
 								<td>
-									{flight.destination_airport_name} ({flight.destination})
+									{flight.destination} ( {flight.destination_airport_code} )
 									<br />
 									<span class="badge badge-ghost badge-sm"
 										>{flight.arrival_date} ( {flight.arrival_time} )</span

@@ -7,6 +7,9 @@
 	export let origin = 'Anjouan'
 	export let destination = 'Mohéli'
 	export let company_logo = ''
+	export let id = ''
+	export let origin_airport_code = ''
+	export let destination_airport_code = ''
 </script>
 
 <div class="trip-card w-full h-97 bg-white px-4">
@@ -25,7 +28,8 @@
 		</div>
 		<div class="mt-4">
 			<span class="text-neutral font-bold text-xs"
-				>{origin} <i class="fa-solid fa-arrow-right" /> {destination}</span
+				>{origin} ( {origin_airport_code} ) <i class="fa-solid fa-arrow-right" />
+				{destination} ( {destination_airport_code} )</span
 			>
 		</div>
 		<div class="grid grid-cols-2 gap-8 mt-4 place-items-center w-full">
@@ -52,7 +56,7 @@
 			</div>
 		</div>
 		<div class="my-8 self-center">
-			<button class="btn btn-primary rounded lg:w-48 w-36 text-xs">Réserver</button>
+			<a href={`/bookflight/${id}`} class="btn btn-primary rounded lg:w-48 w-36 text-xs">Réserver</a>
 		</div>
 	</div>
 </div>

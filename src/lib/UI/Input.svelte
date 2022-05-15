@@ -23,6 +23,7 @@
 		id={inputId}
 		{type}
 		{placeholder}
+		name={inputId}
 		required={isRequired}
 		{value}
 		{disabled}

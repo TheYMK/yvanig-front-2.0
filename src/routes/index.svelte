@@ -32,7 +32,7 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		loadFlights(page, limit)
 	})
 </script>

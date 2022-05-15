@@ -13,10 +13,13 @@
 	import FileUpload from '$lib/UI/FileUpload.svelte'
 	import { goto } from '$app/navigation'
 	import GenericHero from '$lib/UI/GenericHero.svelte'
+	import ManageSeatModal from '$lib/Admin/Modals/ManageSeatModal.svelte'
 
 	export let data = {
 		airline: '',
 		flight_number: '',
+		origin_airport_code: '',
+		destination_airport_code: '',
 		capacity: 0,
 		origin: '',
 		destination: '',
@@ -37,6 +40,7 @@
 
 	let images = []
 	let loading = false
+	let isManageSeatModalOpened = false
 
 	const loadFlight = async (id: string) => {
 		loading = true
@@ -50,8 +54,6 @@
 			delete data.updated_at
 			// @ts-ignore
 			delete data.created_at
-
-			console.log(data)
 		} catch (e) {
 			console.log(e)
 		} finally {
@@ -65,6 +67,8 @@
 		if (
 			!data.airline ||
 			!data.flight_number ||
+			!data.origin_airport_code ||
+			!data.destination_airport_code ||
 			data.capacity <= 0 ||
 			!data.origin ||
 			!data.destination ||
@@ -75,6 +79,7 @@
 			!data.departure_date ||
 			!data.arrival_date ||
 			!data.description ||
+			!data.status ||
 			data.seat_base_price <= 0 ||
 			data.seat_price_business_class <= 0 ||
 			data.seat_price_first_class <= 0
@@ -86,7 +91,6 @@
 		data = {
 			...data,
 			company_logo: images.length > 0 ? images[0].url : data.company_logo,
-			status: FlightStatuses.SCHEDULED,
 			capacity: parseInt(data.capacity.toString())
 		}
 
@@ -96,6 +100,8 @@
 			data = {
 				airline: '',
 				flight_number: '',
+				origin_airport_code: '',
+				destination_airport_code: '',
 				capacity: 0,
 				origin: '',
 				destination: '',
@@ -146,13 +152,16 @@
 			containerClassName="h-[300px]"
 		>
 			<div slot="action" class="mt-10">
-				<button class="btn btn-primary rounded text-xs">Gérer les sièges</button>
+				<button
+					class="btn btn-primary rounded text-xs"
+					on:click={() => (isManageSeatModalOpened = true)}>Gérer les sièges</button
+				>
 			</div>
 		</GenericHero>
 
 		<div class="mt-10 grid grid-cols-4 gap-10 px-8 lg:px-16">
 			<div class="col-span-4 lg:col-span-3">
-				<FileUpload {images} placeholder="Veuillez telechargé le logo de la compagnie" />
+				<FileUpload {images} placeholder="Veuillez telecharger le logo de la compagnie" />
 				<form class="grid grid-cols-6 gap-8">
 					<div class="col-span-6 lg:col-span-3">
 						<Input
@@ -226,6 +235,20 @@
 					</div>
 					<div class="col-span-6 lg:col-span-3">
 						<Input
+							label="Code aéroport d'origine"
+							isRequired
+							inputId="origin_airport_code"
+							type="text"
+							placeholder="Hahaya Airport"
+							value={data.origin_airport_code}
+							on:input={(e) => {
+								// @ts-ignore
+								data = { ...data, origin_airport_code: e.target.value }
+							}}
+						/>
+					</div>
+					<div class="col-span-6 lg:col-span-3">
+						<Input
 							label="Aéroport de destination"
 							isRequired
 							inputId="destination_airport_name"
@@ -235,6 +258,20 @@
 							on:input={(e) => {
 								// @ts-ignore
 								data = { ...data, destination_airport_name: e.target.value }
+							}}
+						/>
+					</div>
+					<div class="col-span-6 lg:col-span-3">
+						<Input
+							label="Code aéroport de destination"
+							isRequired
+							inputId="destination_airport_code"
+							type="text"
+							placeholder="Hahaya Airport"
+							value={data.destination_airport_code}
+							on:input={(e) => {
+								// @ts-ignore
+								data = { ...data, destination_airport_code: e.target.value }
 							}}
 						/>
 					</div>
@@ -377,6 +414,40 @@
 					</div>
 					<div class="col-span-6 lg:col-span-6">
 						<div class="form-control">
+							<label class="label" for="status">
+								<span class="label-text text-neutral font-medium"
+									>Statut du vol
+									<span class="text-red-500 ml-1">*</span>
+								</span>
+							</label>
+							<select
+								id="status"
+								class="input input-bordered border-neutral w-full uppercase"
+								value={data.status}
+								on:change={(e) => {
+									// @ts-ignore
+									data = { ...data, status: e.target.value }
+								}}
+							>
+								<option disabled value="">Veuillez selectionner un statut</option>
+								<option value={FlightStatuses.SCHEDULED}>{FlightStatuses.SCHEDULED}</option>
+								<option value={FlightStatuses.DELAYED}>{FlightStatuses.DELAYED}</option>
+								<option value={FlightStatuses.IN_AIR}>{FlightStatuses.IN_AIR}</option>
+								<option value={FlightStatuses.EXPECTED}>{FlightStatuses.EXPECTED}</option>
+								<option value={FlightStatuses.DIVERTED}>{FlightStatuses.DIVERTED}</option>
+								<option value={FlightStatuses.RECOVERY}>{FlightStatuses.RECOVERY}</option>
+								<option value={FlightStatuses.LANDED}>{FlightStatuses.LANDED}</option>
+								<option value={FlightStatuses.ARRIVED}>{FlightStatuses.ARRIVED}</option>
+								<option value={FlightStatuses.CANCELLED}>{FlightStatuses.CANCELLED}</option>
+								<option value={FlightStatuses.NO_TAKEOFF_INFO}
+									>{FlightStatuses.NO_TAKEOFF_INFO}</option
+								>
+								<option value={FlightStatuses.PAST_FLIGHT}>{FlightStatuses.PAST_FLIGHT}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-span-6 lg:col-span-6">
+						<div class="form-control">
 							<label class="label" for="description">
 								<span class="label-text text-neutral font-medium"
 									>Information additionnelle
@@ -401,6 +472,8 @@
 					<button
 						disabled={!data.airline ||
 							!data.flight_number ||
+							!data.origin_airport_code ||
+							!data.destination_airport_code ||
 							data.capacity <= 0 ||
 							!data.origin ||
 							!data.destination ||
@@ -411,6 +484,7 @@
 							!data.departure_date ||
 							!data.arrival_date ||
 							!data.description ||
+							!data.status ||
 							data.seat_base_price <= 0 ||
 							data.seat_price_business_class <= 0 ||
 							data.seat_price_first_class <= 0}
@@ -447,6 +521,8 @@
 				<hr class="my-4" />
 				<TripCard
 					trip_type="flight"
+					origin_airport_code={data.origin_airport_code}
+					destination_airport_code={data.destination_airport_code}
 					departure_date={data.departure_date}
 					departure_time={data.departure_time}
 					arrival_date={data.arrival_date}
@@ -460,6 +536,7 @@
 		<div class="mt-20">
 			<Footer />
 		</div>
+		<ManageSeatModal bind:isManageSeatModalOpened flightId={$page.params?.id} />
 	</AdminGuard>
 </Layout>
 

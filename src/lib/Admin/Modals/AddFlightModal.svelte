@@ -12,6 +12,8 @@
 	export let data = {
 		airline: '',
 		flight_number: '',
+		origin_airport_code: '',
+		destination_airport_code: '',
 		capacity: 0,
 		origin: '',
 		destination: '',
@@ -39,6 +41,8 @@
 		if (
 			!data.airline ||
 			!data.flight_number ||
+			!data.origin_airport_code ||
+			!data.destination_airport_code ||
 			data.capacity <= 0 ||
 			!data.origin ||
 			!data.destination ||
@@ -72,6 +76,8 @@
 			data = {
 				airline: '',
 				flight_number: '',
+				origin_airport_code: '',
+				destination_airport_code: '',
 				capacity: 0,
 				origin: '',
 				destination: '',
@@ -114,7 +120,7 @@
 		>
 		<h3 class="text-lg font-bold">Ajouter un nouveau vol</h3>
 		<div class="py-4">
-			<FileUpload {images} placeholder="Veuillez telechargé le logo de la compagnie" />
+			<FileUpload {images} placeholder="Veuillez telecharger le logo de la compagnie" />
 			<form class="grid grid-cols-6 gap-8">
 				<div class="col-span-6 lg:col-span-3">
 					<Input
@@ -188,6 +194,20 @@
 				</div>
 				<div class="col-span-6 lg:col-span-3">
 					<Input
+						label="Code aéroport d'origine"
+						isRequired
+						inputId="origin_airport_code"
+						type="text"
+						placeholder="Hahaya Airport"
+						value={data.origin_airport_code}
+						on:input={(e) => {
+							// @ts-ignore
+							data = { ...data, origin_airport_code: e.target.value }
+						}}
+					/>
+				</div>
+				<div class="col-span-6 lg:col-span-3">
+					<Input
 						label="Aéroport de destination"
 						isRequired
 						inputId="destination_airport_name"
@@ -197,6 +217,20 @@
 						on:input={(e) => {
 							// @ts-ignore
 							data = { ...data, destination_airport_name: e.target.value }
+						}}
+					/>
+				</div>
+				<div class="col-span-6 lg:col-span-3">
+					<Input
+						label="Code aéroport de destination"
+						isRequired
+						inputId="destination_airport_code"
+						type="text"
+						placeholder="Hahaya Airport"
+						value={data.destination_airport_code}
+						on:input={(e) => {
+							// @ts-ignore
+							data = { ...data, destination_airport_code: e.target.value }
 						}}
 					/>
 				</div>
@@ -271,6 +305,7 @@
 						}}
 					/>
 				</div>
+
 				<div class="col-span-6 lg:col-span-3">
 					<div class="form-control">
 						<label class="label" for="refundable">
@@ -363,6 +398,8 @@
 				<button
 					disabled={!data.airline ||
 						!data.flight_number ||
+						!data.origin_airport_code ||
+						!data.destination_airport_code ||
 						data.capacity <= 0 ||
 						!data.origin ||
 						!data.destination ||

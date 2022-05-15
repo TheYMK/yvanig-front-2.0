@@ -7,6 +7,7 @@
 	import { isEmailValid } from '../../../config/helpers'
 	import { goto } from '$app/navigation'
 	import Layout from '$lib/Layout.svelte'
+	import { page } from '$app/stores'
 
 	let data = {
 		email: '',
@@ -68,7 +69,11 @@
 		try {
 			await api.signin(data)
 			notificationCenter.displaySuccessNotification('Vous êtes maintenant connecté.')
-			goto('/')
+			if ($page.url.searchParams.get('from')) {
+				goto($page.url.searchParams.get('from'))
+			} else {
+				goto('/')
+			}
 		} catch (err) {
 			if (err.response?.data?.statusCode === 404) {
 				notificationCenter.displayErrorNotification(

@@ -75,13 +75,14 @@
 					<!--  -->
 					<div class="col-span-6 lg:col-span-3">
 						<span class="text-sm"
-							><strong>Aéroport d'origine:</strong><br /> {selectedFlight.origin_airport_name}</span
+							><strong>Aéroport d'origine:</strong><br />
+							{selectedFlight.origin_airport_name} ( {selectedFlight.origin_airport_code} )</span
 						>
 					</div>
 					<div class="col-span-6 lg:col-span-3">
 						<span class="text-sm"
 							><strong>Aéroport de destination:</strong><br />
-							{selectedFlight.destination_airport_name}</span
+							{selectedFlight.destination_airport_name} ( {selectedFlight.destination_airport_code} )</span
 						>
 					</div>
 					<!--  -->

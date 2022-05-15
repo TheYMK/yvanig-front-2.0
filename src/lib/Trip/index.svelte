@@ -44,7 +44,10 @@
 				<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 					{#each flights as flight}
 						<TripCard
+							id={flight.id}
 							trip_type="flight"
+							origin_airport_code={flight.origin_airport_code}
+							destination_airport_code={flight.destination_airport_code}
 							departure_date={flight.departure_date}
 							departure_time={flight.departure_time}
 							arrival_date={flight.arrival_date}
