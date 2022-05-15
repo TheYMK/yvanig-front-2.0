@@ -170,7 +170,7 @@
 								: onUpdateBookingStatus('confirmed')}
 					>
 						{#if loading}
-							<div class="animate-spin">
+							<div class="spin">
 								<svg
 									role="status"
 									class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-white fill-primary"
@@ -199,7 +199,7 @@
 								? onRemoveBooking()
 								: onUpdateBookingStatus('cancelled')}
 						>{#if loading}
-							<div class="animate-spin">
+							<div class="spin">
 								<svg
 									role="status"
 									class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-white fill-primary"

@@ -2,78 +2,76 @@
 	import Navbar from '$lib/Navbar/index.svelte'
 	import Footer from '$lib/Footer/index.svelte'
 	import Input from '$lib/UI/Input.svelte'
+	import { page } from '$app/stores'
+	import { onMount } from 'svelte'
+	import jwt_decode from 'jwt-decode'
 	import { notificationCenter } from '../../../config/notification'
-	import { isEmailValid } from '../../../config/helpers'
 	import { api } from '../../../api/Api'
+	import { goto } from '$app/navigation'
 	import Layout from '$lib/Layout.svelte'
 
 	let data = {
-		email: ''
+		token: ''
 	}
+	let email = ''
 
-	let errors = {
-		email: ''
-	}
 	let loading = false
 
-	const onEmailChange = (e: any) => {
-		data.email = e.target.value
-		if (!isEmailValid(data.email)) {
-			errors = { ...errors, email: 'Veuillez renseigner un email valide.' }
-		} else {
-			errors = { ...errors, email: '' }
-		}
-	}
-
 	const onSubmit = async (e: any) => {
-		e.preventDefault()
 		loading = true
-		if (errors.email) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner un email valide.')
+		e.preventDefault()
+
+		if (!data.token) {
+			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.')
 			loading = false
 			return
 		}
 
 		try {
-			await api.sendEmailVerification(data.email)
-			notificationCenter.displaySuccessNotification('Un email de vérification vous a été envoyé.')
+			await api.verifyEmail(data)
+
+			notificationCenter.displaySuccessNotification('Votre email a bien été vérifié.')
+			goto('/')
 		} catch (err) {
-			if (err.response?.data?.statusCode === 400) {
-				notificationCenter.displayErrorNotification(
-					"Nous n'avons pas pu vous envoyer un email de vérification. Veuillez réessayer plus tard."
-				)
-			} else {
-				notificationCenter.displayErrorNotification('Une erreur est survenue.')
-			}
+			notificationCenter.displayErrorNotification('Une erreur est survenue.')
 		} finally {
 			loading = false
 		}
 	}
+	onMount(() => {
+		data.token = $page.url.searchParams.get('token')
+		// @ts-ignore
+		email = jwt_decode(data.token).email
+	})
 </script>
 
 <Layout>
 	<Navbar />
 	<div class="h-screen lg:px-16">
 		<div class="flex justify-center items-center h-full">
-			<div class="auth-card bg-white w-[400px] h-fit md:rounded-[15px] p-8">
+			<div class="auth-card bg-white w-[500px] h-fit md:rounded-[15px] p-8 mt-52 lg:mt-0">
 				<div id="title" class="text-center">
-					<h1 class="font-bold text-neutral">S'enregistrer</h1>
+					<h1 class="font-bold text-neutral">Vérifier votre adresse e-mail</h1>
 				</div>
 				<div id="form" class="mt-10">
-					<form class="space-y-4">
-						<Input
-							label="Adresse email"
-							isRequired
-							inputId="email"
-							type="email"
-							placeholder="johndoe@xxxx.xxx"
-							value={data.email}
-							on:input={onEmailChange}
-						/>
-
-						<div class="text-center">
+					<form class="grid grid-cols-2 gap-8">
+						<div class="col-span-2">
+							<Input
+								label="Adresse email"
+								isRequired
+								disabled
+								inputId="email"
+								type="email"
+								value={email}
+								on:input={(e) => {
+									// @ts-ignore
+									data.last_name = e.target.value
+								}}
+							/>
+						</div>
+						<div class="text-center col-span-2">
 							<button
-								disabled={!data.email || errors.email.length > 0}
+								disabled={!data.token}
 								on:click={onSubmit}
 								class="btn btn-primary rounded-full w-48 text-xs mt-4"
 							>
@@ -97,29 +95,16 @@
 										</svg>
 									</div>
 								{:else}
-									<span>S'enregistrer</span>
+									<span>Vérifier</span>
 								{/if}
 							</button>
-							{#if errors.email}
-								<div>
-									<p class="text-red-600 text-xs mt-4">{errors.email}</p>
-								</div>
-							{/if}
-						</div>
-
-						<div class="text-center">
-							<a
-								href="/auth/login"
-								class="text-neutral text-xs hover:text-primary hover:font-bold underline"
-								>Vous avez déjà un compte ? Connectez-vous</a
-							>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="mt-20">
+	<div class="mt-36 lg:mt-20">
 		<Footer />
 	</div>
 </Layout>

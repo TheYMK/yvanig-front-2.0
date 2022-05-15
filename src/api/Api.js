@@ -7,8 +7,8 @@ class Api {
   }
 
   // USER
-  async sendEmailVerification(email) {
-    return this.httpClient.post('/auth/send-email-verification', { email })
+  async sendEmailVerification(email, isRegistration = true) {
+    return this.httpClient.post('/auth/send-email-verification', { email, isRegistration })
   }
 
   async register(data) {
@@ -27,6 +27,13 @@ class Api {
     return this.httpClient.post('/auth/password-reset', data)
   }
 
+  async updateUserInfo(data) {
+    return this.httpClient.patch(`/auth/update`, data)
+  }
+
+  async verifyEmail(data) {
+    return this.httpClient.patch(`/auth/email/verify`, data)
+  }
 
   async getCurrentuser() {
     return this.httpClient.get('/auth/whoami')
