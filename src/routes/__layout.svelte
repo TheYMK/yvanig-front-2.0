@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css'
+	import 'bytemd/dist/index.css'
 	import { addMessages, getLocaleFromNavigator, init } from 'svelte-i18n'
 	import fr from '../locales/fr.json'
 	import { SvelteToast } from '@zerodevx/svelte-toast'
