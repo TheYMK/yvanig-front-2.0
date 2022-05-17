@@ -8,6 +8,7 @@
 	import ManageFlights from './Contents/ManageFlights.svelte'
 	import ManageSettings from './Contents/ManageSettings.svelte'
 	import { notificationCenter } from '../../config/notification'
+import Overview from './Contents/Overview.svelte'
 
 	export let contentType = admin_menus.OVERVIEW
 
@@ -80,6 +81,9 @@
 			</button>
 		</div>
 	{:else}
+	{#if contentType === admin_menus.OVERVIEW}
+		 <Overview/>
+	{/if}
 		{#if contentType === admin_menus.FLIGHTS}
 			<ManageFlights />
 		{/if}

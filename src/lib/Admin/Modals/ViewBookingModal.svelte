@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { BookingStatuses, ClassTypes } from '../../../config/constants'
 	import moment from 'moment'
+	import settingsStore from '../../../stores/settingsStore'
 
 	export let isViewBookingModalOpened = false
 	export let selectedBooking = null
@@ -128,11 +129,13 @@
 						<br />
 						<span>
 							{#if selectedBooking.seat.class_type === ClassTypes.ECONOMY}
-								{selectedBooking.price} KMF (Standard)
+								{selectedBooking.price}
+								{$settingsStore && $settingsStore.default_currency} (Standard)
 							{:else if selectedBooking.seat.class_type === ClassTypes.BUSINESS}
-								{selectedBooking.price} KMF (Premium)
+								{selectedBooking.price}
+								{$settingsStore && $settingsStore.default_currency} (Premium)
 							{:else}
-								{selectedBooking.price} KMF (Ultime)
+								{selectedBooking.price} {$settingsStore && $settingsStore.default_currency} (Ultime)
 							{/if}
 						</span>
 					</div>

@@ -1,16 +1,17 @@
 import stores from '../stores'
 
-// export async function initBaseStores() {
-//   const { bookingStore } = stores
+export async function initBaseStores() {
+  const { settingsStore } = stores
 
-//   try {
-//     await Promise.all([
-//       bookingStore.init()
-//     ])
-//   } catch (err) {
-//     console.error('[initBaseStores] error on init', err)
-//   }
-// }
+  try {
+    await Promise.all([
+      settingsStore.init()
+    ])
+
+  } catch (err) {
+    console.error('[initBaseStores] error on init', err)
+  }
+}
 
 export async function initBookingStore(flightId) {
   const { bookingStore } = stores

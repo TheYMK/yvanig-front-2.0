@@ -97,7 +97,7 @@
 								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}
 						>
-							Réservation
+							Visa et Hébérgement
 						</a>
 						<a
 							href="/"

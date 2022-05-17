@@ -20,7 +20,7 @@
 			>
 		</li>
 		<li class:bordered={activeMenu === admin_menus.FLIGHTS}>
-			<a href={`#${admin_menus.FLIGHTS}`} class="hover:bg-primary hover:text-white">Voyages</a>
+			<a href={`#${admin_menus.FLIGHTS}`} class="hover:bg-primary hover:text-white">Vols</a>
 		</li>
 		<li class:bordered={activeMenu === admin_menus.BOOKINGS}>
 			<a href={`#${admin_menus.BOOKINGS}`} class="hover:bg-primary hover:text-white">Réservations</a
@@ -76,7 +76,7 @@
 					>
 				</li>
 				<li class:bordered={activeMenu === admin_menus.FLIGHTS}>
-					<a href={`#${admin_menus.FLIGHTS}`} class="hover:bg-primary hover:text-white">Voyages</a>
+					<a href={`#${admin_menus.FLIGHTS}`} class="hover:bg-primary hover:text-white">Vols</a>
 				</li>
 				<li class:bordered={activeMenu === admin_menus.BOOKINGS}>
 					<a href={`#${admin_menus.BOOKINGS}`} class="hover:bg-primary hover:text-white"

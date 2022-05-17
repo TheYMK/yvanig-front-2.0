@@ -1,5 +1,6 @@
 <script>
 	import GenericHero from '$lib/UI/GenericHero.svelte'
+	import SystemSetting from './SystemSetting.svelte'
 
 	import UserInfoSetting from './UserInfoSetting.svelte'
 
@@ -19,6 +20,13 @@
 			<div class="h-[5px] mt-2 bg-primary w-36" />
 		</div>
 		<UserInfoSetting />
+	</div>
+	<div class="mt-20 mb-20">
+		<div>
+			<h1 class="text-2xl font-bold">Système</h1>
+			<div class="h-[5px] mt-2 bg-primary w-36" />
+		</div>
+		<SystemSetting />
 	</div>
 </div>
 

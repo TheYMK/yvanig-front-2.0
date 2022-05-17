@@ -47,3 +47,30 @@ export const BookingStatuses = {
   CANCELLED: 'cancelled',
   PENDING: 'pending',
 }
+
+export const Themes = {
+  LIGHT: 'light',
+  DARK: 'dark'
+}
+
+export const Currencies = [
+  {
+    name: 'Franc Comorien',
+    symbol: 'KMF'
+  },
+  {
+    name: 'Euro',
+    symbol: 'EUR'
+  }
+]
+
+export const Languages = [
+  {
+    name: 'Français',
+    symbol: 'fr'
+  },
+  {
+    name: 'Anglais',
+    symbol: 'en'
+  }
+]

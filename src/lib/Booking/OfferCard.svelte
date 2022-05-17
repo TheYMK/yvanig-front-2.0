@@ -2,6 +2,7 @@
 	import { ClassTypes } from '../../config/constants'
 
 	import { createEventDispatcher } from 'svelte'
+	import settingsStore from '../../stores/settingsStore'
 
 	export let flight = null
 	export let numberOfSeatsAvailable = 0
@@ -29,11 +30,11 @@
 		</div>
 		<div class="stat-value text-2xl lg:text-4xl">
 			{#if type === ClassTypes.ECONOMY}
-				{flight.seat_base_price} KMF
+				{flight.seat_base_price} {$settingsStore && $settingsStore.default_currency}
 			{:else if type === ClassTypes.BUSINESS}
-				{flight.seat_price_business_class} KMF
+				{flight.seat_price_business_class} {$settingsStore && $settingsStore.default_currency}
 			{:else}
-				{flight.seat_price_first_class} KMF
+				{flight.seat_price_first_class} {$settingsStore && $settingsStore.default_currency}
 			{/if}
 		</div>
 		<div class="stat-actions">

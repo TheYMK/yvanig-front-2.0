@@ -20,13 +20,13 @@
 
 	let loading = false
 
-	const onInputChange = (e: any, id: string) => {
-		if (data[id] !== e.target.value) {
+	const onInputChange = (e: any, key: string) => {
+		if (data[key] !== e.target.value) {
 			disableSave = false
 		}
 
-		data[id] = e.target.value
-		if (id === 'email') {
+		data[key] = e.target.value
+		if (key === 'email') {
 			if (!isEmailValid(data.email)) {
 				errors = { ...errors, email: 'Veuillez renseigner un email valide.' }
 			} else {
@@ -107,7 +107,6 @@
 	<div class="cols-span-3 lg:col-span-1">
 		<Input
 			label="Nom de famille"
-			isRequired
 			inputId="last_name"
 			type="text"
 			placeholder=""
@@ -121,7 +120,6 @@
 	<div class="cols-span-3 lg:col-span-1">
 		<Input
 			label="Prénom"
-			isRequired
 			inputId="first_name"
 			type="text"
 			placeholder=""
@@ -135,7 +133,6 @@
 	<div class="cols-span-3 lg:col-span-1">
 		<Input
 			label="Email"
-			isRequired
 			inputId="email"
 			type="email"
 			placeholder=""

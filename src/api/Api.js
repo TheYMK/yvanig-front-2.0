@@ -6,6 +6,12 @@ class Api {
     this.httpClient = new HttpClient();
   }
 
+  // 
+
+  async getStats() {
+    return this.httpClient.get('/stats')
+  }
+
   // USER
   async sendEmailVerification(email, isRegistration = true) {
     return this.httpClient.post('/auth/send-email-verification', { email, isRegistration })
@@ -116,6 +122,14 @@ class Api {
   }
   async removeBooking(id) {
     return this.httpClient.delete(`/bookings/${id}`)
+  }
+
+  // SETTINGS
+  getSettings() {
+    return this.httpClient.get('/settings')
+  }
+  updateSettings(settings) {
+    return this.httpClient.patch('/settings', settings)
   }
 }
 
