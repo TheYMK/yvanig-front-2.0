@@ -1,8 +1,11 @@
 <script lang="ts">
 	import '../app.css'
 	import { addMessages, getLocaleFromNavigator, init } from 'svelte-i18n'
-	import fr from '../locales/fr.json'
+	import fr from '../locale/fr.json'
 	import { SvelteToast } from '@zerodevx/svelte-toast'
+	import { onMount } from 'svelte'
+	import { initBaseStores } from '../stores/initStore'
+	import { setCurrentTheme } from '../config/helpers'
 
 	addMessages('fr', fr)
 
@@ -15,6 +18,15 @@
 		duration: 10000,
 		pausable: true
 	}
+
+	onMount(async () => {
+		try {
+			await Promise.all([initBaseStores()])
+			setCurrentTheme()
+		} catch (err) {
+			console.log('[ERROR INIT]', err)
+		}
+	})
 </script>
 
 <main>

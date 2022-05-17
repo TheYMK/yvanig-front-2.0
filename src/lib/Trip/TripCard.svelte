@@ -1,22 +1,22 @@
 <script lang="ts">
 	export let trip_type = 'flight'
 	export let departure_date = '20/02/2022'
-	export let departure_hour = '13:00'
+	export let departure_time = '13:00'
 	export let arrival_date = '20/02/2022'
-	export let arrival_hour = '16:00'
-	export let start_location = 'Anjouan'
-	export let end_location = 'Mohéli'
+	export let arrival_time = '16:00'
+	export let origin = 'Anjouan'
+	export let destination = 'Mohéli'
 	export let company_logo = ''
+	export let id = ''
+	export let origin_airport_code = ''
+	export let destination_airport_code = ''
 </script>
 
 <div class="trip-card w-full h-97 bg-white px-4">
 	<div class="flex flex-col items-center">
 		<div class="avatar mt-6">
 			<div class="w-24 rounded-full">
-				<img
-					src="https://logos-marques.com/wp-content/uploads/2020/12/Air-France-Logo-1998.jpg"
-					alt="company logo"
-				/>
+				<img src={company_logo} alt="company logo" />
 			</div>
 		</div>
 		<div class="mt-4">
@@ -28,7 +28,8 @@
 		</div>
 		<div class="mt-4">
 			<span class="text-neutral font-bold text-xs"
-				>{start_location} <i class="fa-solid fa-arrow-right" /> {end_location}</span
+				>{origin} ( {origin_airport_code} ) <i class="fa-solid fa-arrow-right" />
+				{destination} ( {destination_airport_code} )</span
 			>
 		</div>
 		<div class="grid grid-cols-2 gap-8 mt-4 place-items-center w-full">
@@ -40,7 +41,7 @@
 			<div class="text-neutral">
 				<span class="font-bold text-xs">Heure:</span>
 				<br />
-				<span class="text-xs">{departure_hour}</span>
+				<span class="text-xs">{departure_time}</span>
 			</div>
 			<!--  -->
 			<div class="text-neutral">
@@ -51,11 +52,11 @@
 			<div class="text-neutral">
 				<span class="font-bold text-xs">Heure:</span>
 				<br />
-				<span class="text-xs">{arrival_hour}</span>
+				<span class="text-xs">{arrival_time}</span>
 			</div>
 		</div>
 		<div class="my-8 self-center">
-			<button class="btn btn-primary rounded lg:w-48 w-36 text-xs">Réserver</button>
+			<a href={`/bookflight/${id}`} class="btn btn-primary rounded lg:w-48 w-36 text-xs">Réserver</a>
 		</div>
 	</div>
 </div>
