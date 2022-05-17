@@ -12,7 +12,7 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		setLoggedInUser()
 	})
 </script>

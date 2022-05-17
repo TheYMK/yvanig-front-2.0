@@ -1,4 +1,6 @@
 <script>
+	import settingsStore from '../../stores/settingsStore'
+
 	export let hotelName = ''
 	export let hotelImageUrl = ''
 	export let hotelLogo = ''
@@ -37,7 +39,10 @@
 		</div>
 		<div class="flex flex-col">
 			<div class="flex flex-row justify-end">
-				<h2 class="text-neutral font-bold">{hotelPrice} KMF / nuit</h2>
+				<h2 class="text-neutral font-bold">
+					{hotelPrice}
+					{$settingsStore && $settingsStore.default_currency} / nuit
+				</h2>
 			</div>
 			<div class="flex flex-row justify-between items-center mt-4">
 				<div class="">

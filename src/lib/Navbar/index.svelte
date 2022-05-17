@@ -97,7 +97,7 @@
 								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}
 						>
-							Réservation
+							Visa et Hébérgement
 						</a>
 						<a
 							href="/"
@@ -113,10 +113,10 @@
 									<div class="dropdown dropdown-end dropdown-hover">
 										<div
 											tabindex="0"
-											class={`btn rounded-full btn-sm text-xs w-40 border-none ${
+											class={`btn rounded-full  btn-sm text-xs w-40 border-none ${
 												y <= 50 && !isMobileMenuOpen && !sticky
 													? 'btn-primary'
-													: 'bg-white hover:bg-white'
+													: 'bg-white hover:bg-white text-neutral'
 											}`}
 										>
 											Mon compte
@@ -145,7 +145,7 @@
 											class={`btn rounded-full btn-sm text-xs w-40 border-none ${
 												y <= 50 && !isMobileMenuOpen && !sticky
 													? 'btn-primary'
-													: 'bg-white hover:bg-white'
+													: 'bg-white hover:bg-white text-neutral'
 											}`}
 										>
 											Mon compte
@@ -173,7 +173,7 @@
 									class={`btn rounded-full btn-sm text-xs w-40 border-none ${
 										y <= 50 && !isMobileMenuOpen && !sticky
 											? 'btn-primary'
-											: 'bg-white hover:bg-white'
+											: 'bg-white hover:bg-white text-neutral'
 									}`}>Se Connecter</a
 								>
 							{/if}
