@@ -5,13 +5,14 @@ const defaultStoreValue = {
   bookingCache: {
     document_type: null,
     document_number: null,
+    phone_number: null,
     date_of_birth: null,
     gender: null,
     booking_type: 'flight',
     selectedOffer: null,
     flightId: null,
     seatId: null,
-    selectedPaymentMethod: null
+    payment_method: null
   },
   currentStep: 0
 }
@@ -36,13 +37,13 @@ const bookingStore = {
           if (cache.selectedOffer) {
             currStep = 2
           }
-          if (cache.selectedOffer && cache.document_type && cache.document_number && cache.date_of_birth && cache.gender) {
+          if (cache.selectedOffer && cache.document_type && cache.document_number && cache.phone_number && cache.date_of_birth && cache.gender) {
             currStep = 3
           }
-          if (cache.selectedOffer && cache.document_type && cache.document_number && cache.date_of_birth && cache.gender && cache.seatId) {
+          if (cache.selectedOffer && cache.document_type && cache.document_number && cache.phone_number && cache.date_of_birth && cache.gender && cache.seatId) {
             currStep = 4
           }
-          if (cache.selectedOffer && cache.document_type && cache.document_number && cache.date_of_birth && cache.gender && cache.seatId && cache.selectedPaymentMethod) {
+          if (cache.selectedOffer && cache.document_type && cache.document_number && cache.phone_number && cache.date_of_birth && cache.gender && cache.seatId && cache.payment_method) {
             currStep = 5
           }
         } else {
@@ -70,13 +71,13 @@ const bookingStore = {
       if (currentBookingProgress.selectedOffer && currentBookingProgress.flightId) {
         currStep = 2
       }
-      if (currentBookingProgress.selectedOffer && currentBookingProgress.flightId && currentBookingProgress.document_type && currentBookingProgress.document_number && currentBookingProgress.date_of_birth && currentBookingProgress.gender) {
+      if (currentBookingProgress.selectedOffer && currentBookingProgress.flightId && currentBookingProgress.document_type && currentBookingProgress.document_number && currentBookingProgress.phone_number && currentBookingProgress.date_of_birth && currentBookingProgress.gender) {
         currStep = 3
       }
-      if (currentBookingProgress.selectedOffer && currentBookingProgress.flightId && currentBookingProgress.document_type && currentBookingProgress.document_number && currentBookingProgress.date_of_birth && currentBookingProgress.gender && currentBookingProgress.seatId) {
+      if (currentBookingProgress.selectedOffer && currentBookingProgress.flightId && currentBookingProgress.document_type && currentBookingProgress.document_number && currentBookingProgress.phone_number && currentBookingProgress.date_of_birth && currentBookingProgress.gender && currentBookingProgress.seatId) {
         currStep = 4
       }
-      if (currentBookingProgress.selectedOffer && currentBookingProgress.flightId && currentBookingProgress.document_type && currentBookingProgress.document_number && currentBookingProgress.date_of_birth && currentBookingProgress.gender && currentBookingProgress.seatId && currentBookingProgress.selectedPaymentMethod) {
+      if (currentBookingProgress.selectedOffer && currentBookingProgress.flightId && currentBookingProgress.document_type && currentBookingProgress.document_number && currentBookingProgress.phone_number && currentBookingProgress.date_of_birth && currentBookingProgress.gender && currentBookingProgress.seatId && currentBookingProgress.payment_method) {
         currStep = 5
       }
 

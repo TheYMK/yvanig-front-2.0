@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BookingStatuses, ClassTypes } from '../../../config/constants'
+	import { BookingStatuses, ClassTypes, PaymentMethods } from '../../../config/constants'
 	import moment from 'moment'
 	import settingsStore from '../../../stores/settingsStore'
 
@@ -63,7 +63,7 @@
 					<div class="space-y-4 col-span-2 lg:col-span-1">
 						<span class="font-bold text-sm">Numéro de téléphone:</span>
 						<br />
-						<span>+330650578840</span>
+						<span>{selectedBooking.passenger.phone_number}</span>
 					</div>
 					<div class="space-y-4 col-span-2 lg:col-span-1">
 						<span class="font-bold text-sm">Type de document:</span>
@@ -136,6 +136,21 @@
 								{$settingsStore && $settingsStore.default_currency} (Premium)
 							{:else}
 								{selectedBooking.price} {$settingsStore && $settingsStore.default_currency} (Ultime)
+							{/if}
+						</span>
+					</div>
+					<div class="space-y-4 col-span-2 lg:col-span-1">
+						<span class="font-bold text-sm">Moyen de paiement:</span>
+						<br />
+						<span>
+							{#if selectedBooking.payment_method === PaymentMethods.BANK_CARD}
+								Carte bancaire
+							{:else if selectedBooking.payment_method === PaymentMethods.MONEYGRAM}
+								Moneygramm
+							{:else if selectedBooking.payment_method === PaymentMethods.PAYPAL}
+								Paypal
+							{:else if selectedBooking.payment_method === PaymentMethods.WESTERN_UNION}
+								Western Union
 							{/if}
 						</span>
 					</div>

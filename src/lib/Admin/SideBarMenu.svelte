@@ -26,6 +26,9 @@
 			<a href={`#${admin_menus.BOOKINGS}`} class="hover:bg-primary hover:text-white">Réservations</a
 			>
 		</li>
+		<li class:bordered={activeMenu === admin_menus.BLOGS}>
+			<a href={`#${admin_menus.BLOGS}`} class="hover:bg-primary hover:text-white">Blogs</a>
+		</li>
 		<li class:bordered={activeMenu === admin_menus.SETTINGS}>
 			<a href={`#${admin_menus.SETTINGS}`} class="hover:bg-primary hover:text-white">Paramètres</a>
 		</li>
@@ -82,6 +85,9 @@
 					<a href={`#${admin_menus.BOOKINGS}`} class="hover:bg-primary hover:text-white"
 						>Réservations</a
 					>
+				</li>
+				<li class:bordered={activeMenu === admin_menus.BLOGS}>
+					<a href={`#${admin_menus.BLOGS}`} class="hover:bg-primary hover:text-white">Blogs</a>
 				</li>
 				<li class:bordered={activeMenu === admin_menus.SETTINGS}>
 					<a href={`#${admin_menus.SETTINGS}`} class="hover:bg-primary hover:text-white"

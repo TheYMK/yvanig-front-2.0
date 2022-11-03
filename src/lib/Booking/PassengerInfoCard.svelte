@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { api } from '../../api/Api'
-
 	import { onMount } from 'svelte'
 	import { createEventDispatcher } from 'svelte'
 	import userStore from '../../stores/user'
@@ -15,6 +14,7 @@
 	let passengerValues = {
 		document_type: '',
 		document_number: '',
+		phone_number: '',
 		date_of_birth: '',
 		gender: ''
 	}
@@ -27,6 +27,7 @@
 					passengerValues = {
 						document_type: response.data[0].document_type,
 						document_number: response.data[0].document_number,
+						phone_number: response.data[0].phone_number,
 						date_of_birth: response.data[0].date_of_birth,
 						gender: response.data[0].gender
 					}
@@ -53,64 +54,8 @@
 			<a href={`/auth/login?from=/bookflight/${flight.id}`} class="btn btn-primary">Se connecter</a>
 		</div>
 	{:else}
-		<form class="grid grid-cols-2 gap-8">
-			<div class="col-span-2 lg:col-span-1">
-				<Input
-					label="Nom de famille"
-					isRequired
-					inputId="last_name"
-					type="text"
-					disabled
-					value={$userStore.last_name}
-				/>
-			</div>
-			<div class="col-span-2 lg:col-span-1">
-				<Input
-					label="Prénom"
-					isRequired
-					inputId="first_name"
-					type="text"
-					disabled
-					value={$userStore.first_name}
-				/>
-			</div>
-			<div class="col-span-2 lg:col-span-1">
-				<div class="form-control">
-					<label class="label" for="status">
-						<span class="label-text text-neutral font-medium"
-							>Type de document
-							<span class="text-red-500 ml-1">*</span>
-						</span>
-					</label>
-					<select
-						id="status"
-						class="input input-bordered border-neutral w-full"
-						value={passengerValues.document_type}
-						on:change={(e) => {
-							// @ts-ignore
-							passengerValues = { ...passengerValues, document_type: e.target.value }
-						}}
-					>
-						<option disabled value="">Veuillez selectionner un type de document</option>
-						<option value={DocumentTypes.PASSPORT}>Passeport</option>
-						<option value={DocumentTypes.ID_CARD}>Carte nationale</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-span-2 lg:col-span-1">
-				<Input
-					label="Numéro du document"
-					isRequired
-					inputId="document_number"
-					type="text"
-					value={passengerValues.document_number}
-					on:input={(e) => {
-						// @ts-ignore
-						passengerValues = { ...passengerValues, document_number: e.target.value }
-					}}
-				/>
-			</div>
-			<div class="col-span-2 lg:col-span-1">
+		<form class="grid grid-cols-4 gap-8">
+			<div class="col-span-4 lg:col-span-4">
 				<div class="form-control">
 					<label class="label" for="gender">
 						<span class="label-text text-neutral font-medium"
@@ -133,7 +78,76 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-span-2 lg:col-span-1">
+			<div class="col-span-4 lg:col-span-2">
+				<Input
+					label="Nom de famille"
+					isRequired
+					inputId="last_name"
+					type="text"
+					disabled
+					value={$userStore.last_name}
+				/>
+			</div>
+			<div class="col-span-4 lg:col-span-2">
+				<Input
+					label="Prénom"
+					isRequired
+					inputId="first_name"
+					type="text"
+					disabled
+					value={$userStore.first_name}
+				/>
+			</div>
+			<div class="col-span-4 lg:col-span-2">
+				<div class="form-control">
+					<label class="label" for="status">
+						<span class="label-text text-neutral font-medium"
+							>Type de document
+							<span class="text-red-500 ml-1">*</span>
+						</span>
+					</label>
+					<select
+						id="status"
+						class="input input-bordered border-neutral w-full"
+						value={passengerValues.document_type}
+						on:change={(e) => {
+							// @ts-ignore
+							passengerValues = { ...passengerValues, document_type: e.target.value }
+						}}
+					>
+						<option disabled value="">Veuillez selectionner un type de document</option>
+						<option value={DocumentTypes.PASSPORT}>Passeport</option>
+						<option value={DocumentTypes.ID_CARD}>Carte nationale</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-span-4 lg:col-span-2">
+				<Input
+					label="Numéro du document"
+					isRequired
+					inputId="document_number"
+					type="text"
+					value={passengerValues.document_number}
+					on:input={(e) => {
+						// @ts-ignore
+						passengerValues = { ...passengerValues, document_number: e.target.value }
+					}}
+				/>
+			</div>
+			<div class="col-span-4 lg:col-span-2">
+				<Input
+					label="Numéro de téléphone"
+					isRequired
+					inputId="phone_number"
+					type="tel"
+					value={passengerValues.phone_number}
+					on:input={(e) => {
+						// @ts-ignore
+						passengerValues = { ...passengerValues, phone_number: e.target.value }
+					}}
+				/>
+			</div>
+			<div class="col-span-4 lg:col-span-2">
 				<Input
 					label="Date de naissance"
 					isRequired
@@ -146,7 +160,7 @@
 					}}
 				/>
 			</div>
-			<div class="col-span-2 flex flex-row space-x-2 justify-center">
+			<div class="col-span-4 flex flex-row space-x-2 justify-center">
 				<div class="btn-group grid grid-cols-2">
 					<button
 						class="btn btn-neutral"

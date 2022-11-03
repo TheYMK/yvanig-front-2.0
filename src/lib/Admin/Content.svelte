@@ -8,7 +8,8 @@
 	import ManageFlights from './Contents/ManageFlights.svelte'
 	import ManageSettings from './Contents/ManageSettings.svelte'
 	import { notificationCenter } from '../../config/notification'
-import Overview from './Contents/Overview.svelte'
+	import Overview from './Contents/Overview.svelte'
+	import ManageBlogs from './Contents/ManageBlogs.svelte'
 
 	export let contentType = admin_menus.OVERVIEW
 
@@ -81,14 +82,17 @@ import Overview from './Contents/Overview.svelte'
 			</button>
 		</div>
 	{:else}
-	{#if contentType === admin_menus.OVERVIEW}
-		 <Overview/>
-	{/if}
+		{#if contentType === admin_menus.OVERVIEW}
+			<Overview />
+		{/if}
 		{#if contentType === admin_menus.FLIGHTS}
 			<ManageFlights />
 		{/if}
 		{#if contentType === admin_menus.BOOKINGS}
 			<ManageBookings />
+		{/if}
+		{#if contentType === admin_menus.BLOGS}
+			<ManageBlogs />
 		{/if}
 		{#if contentType === admin_menus.SETTINGS}
 			<ManageSettings />

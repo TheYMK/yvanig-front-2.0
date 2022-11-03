@@ -32,6 +32,22 @@
 		status: ''
 	}
 
+	let countries = [
+		{ place: 'Anjouan', airport_name: 'Aéroport de Ouani', airport_code: 'AJN' },
+		{
+			place: 'Grande Comore',
+			airport_name: 'Aéroport international Moroni Prince Saïd Ibrahim',
+			airport_code: 'HAH'
+		},
+		{ place: 'Moheli', airport_name: 'Aéroport Bandar Es Eslam', airport_code: 'NWA' },
+		{
+			place: 'Mayotte',
+			airport_name: 'Aéroport international Dzaoudzi-Pamandzi',
+			airport_code: 'DZA'
+		},
+		{ place: 'Tanzanie', airport_name: 'Julius Nyerere International Airport', airport_code: 'DAR' }
+	]
+
 	let images = []
 	let loading = false
 
@@ -151,32 +167,66 @@
 					/>
 				</div>
 				<div class="col-span-6 lg:col-span-3">
-					<Input
-						label="Pays d'origine"
-						isRequired
-						inputId="origin"
-						type="text"
-						placeholder="Comores"
+					<label class="label" for="origin">
+						<span class="label-text text-neutral font-medium"
+							>Lieu d'origine
+							<span class="text-red-500 ml-1">*</span>
+						</span>
+					</label>
+					<select
+						id="origin"
+						class="select select-bordered w-full border-black"
 						value={data.origin}
+						required
 						on:input={(e) => {
 							// @ts-ignore
-							data = { ...data, origin: e.target.value }
+							data = {
+								...data,
+								origin: e.target.value,
+								origin_airport_name: countries.find((country) => country.place === e.target.value)
+									.airport_name,
+								origin_airport_code: countries.find((country) => country.place === e.target.value)
+									.airport_code
+							}
 						}}
-					/>
+					>
+						<option value="" disabled selected>Selectionnez le lieu d'origine?</option>
+						{#each countries.filter((country) => country.place != data.destination) as country}
+							<option value={country.place}>{country.place}</option>
+						{/each}
+					</select>
 				</div>
 				<div class="col-span-6 lg:col-span-3">
-					<Input
-						label="Pays de destination"
-						isRequired
-						inputId="destination"
-						type="text"
-						placeholder="Tanzania"
+					<label class="label" for="destination">
+						<span class="label-text text-neutral font-medium"
+							>Lieu de destination
+							<span class="text-red-500 ml-1">*</span>
+						</span>
+					</label>
+					<select
+						id="destination"
+						class="select select-bordered w-full border-black"
 						value={data.destination}
+						required
 						on:input={(e) => {
 							// @ts-ignore
-							data = { ...data, destination: e.target.value }
+							data = {
+								...data,
+								destination: e.target.value,
+								destination_airport_name: countries.find(
+									(country) => country.place === e.target.value
+								).airport_name,
+								destination_airport_code: countries.find(
+									(country) => country.place === e.target.value
+								).airport_code
+							}
 						}}
-					/>
+					>
+						<option value="" disabled selected>Selectionnez le lieu de destination?</option>
+						{#each countries.filter((country) => country.place != data.origin) as country}
+							<option value={country.place}>{country.place}</option>
+						{/each}
+					</select>
 				</div>
 				<div class="col-span-6 lg:col-span-3">
 					<Input
