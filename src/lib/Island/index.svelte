@@ -16,7 +16,7 @@
 			id: 'island2'
 		},
 		{
-			island_name: 'Mohéli',
+			island_name: 'Moheli',
 			id: 'island3'
 		},
 		{
@@ -44,7 +44,7 @@
 					<IslandCard island_name="Grande Comore" />
 				</div>
 				<div>
-					<IslandCard island_name="Mohéli" />
+					<IslandCard island_name="Moheli" />
 				</div>
 				<div>
 					<IslandCard island_name="Mayotte" />

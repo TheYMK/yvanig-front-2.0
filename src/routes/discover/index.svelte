@@ -8,6 +8,7 @@
 	import { notificationCenter } from '../../config/notification'
 	import { onMount } from 'svelte'
 	import GenericHero from '$lib/UI/GenericHero.svelte'
+	import { page as pageStore } from '$app/stores'
 
 	let limit = 8
 	let page = 0
@@ -18,7 +19,12 @@
 	const loadFlights = async (page: any, limit: any) => {
 		loading = true
 		try {
-			const response = await api.getFlights(page, limit)
+			let filters = {
+				filterByOrigin: $pageStore.url.searchParams.get('filterByOrigin') ?? '',
+				filterByDestination: $pageStore.url.searchParams.get('filterByDestination') ?? '',
+				filterByDepartureDate: $pageStore.url.searchParams.get('filterByDepartureDate') ?? ''
+			}
+			const response = await api.getFlights(page, limit, filters)
 			flights = [...flights, ...response.data.flights]
 			total = response.data?.total_count
 		} catch (err) {
@@ -52,9 +58,9 @@
 	<div class="mt-20">
 		<Trip {flights} {loading} {total} on:loadMore={loadMore} />
 	</div>
-	<div class="mt-20">
+	<!-- <div class="mt-20">
 		<Hotel />
-	</div>
+	</div> -->
 	<div class="mt-20">
 		<Footer />
 	</div>

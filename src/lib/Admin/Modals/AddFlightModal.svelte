@@ -191,8 +191,10 @@
 						}}
 					>
 						<option value="" disabled selected>Selectionnez le lieu d'origine?</option>
-						{#each countries.filter((country) => country.place != data.destination) as country}
-							<option value={country.place}>{country.place}</option>
+						{#each countries as country}
+							<option disabled={country.place === data.destination} value={country.place}
+								>{country.place}</option
+							>
 						{/each}
 					</select>
 				</div>
@@ -223,8 +225,10 @@
 						}}
 					>
 						<option value="" disabled selected>Selectionnez le lieu de destination?</option>
-						{#each countries.filter((country) => country.place != data.origin) as country}
-							<option value={country.place}>{country.place}</option>
+						{#each countries as country}
+							<option disabled={country.place === data.origin} value={country.place}
+								>{country.place}</option
+							>
 						{/each}
 					</select>
 				</div>

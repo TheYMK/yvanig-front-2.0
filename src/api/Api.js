@@ -50,8 +50,12 @@ class Api {
   }
 
   // FLIGHT
-  async getFlights(page = 0, limit = 10) {
-    return this.httpClient.get(`/flights?page=${page}&limit=${limit}`)
+  async getFlights(page = 0, limit = 10, filters = null) {
+    if (filters === null) {
+      return this.httpClient.get(`/flights?page=${page}&limit=${limit}`)
+    } else {
+      return this.httpClient.get(`/flights?page=${page}&limit=${limit}&filterByOrigin=${filters.filterByOrigin}&filterByDestination=${filters.filterByDestination}&filterByDepartureDate=${filters.filterByDepartureDate}`)
+    }
   }
 
   async createFlight(data) {

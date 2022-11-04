@@ -40,6 +40,10 @@
 						/>
 					</svg>
 				</div>
+			{:else if flights.length === 0}
+				<div class="flex justify-center items-center">
+					<p>Aucun vol n'a été trouvé</p>
+				</div>
 			{:else}
 				<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 					{#each flights as flight}
