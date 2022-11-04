@@ -118,6 +118,9 @@ class Api {
   async getBookings(page = 0, limit = 10) {
     return this.httpClient.get('/bookings')
   }
+  async getBookingsByUser(page = 0, limit = 10) {
+    return this.httpClient.get('/bookings/me')
+  }
   async updateBooking(id, data) {
     return this.httpClient.patch(`/bookings/${id}`, data)
   }
@@ -134,6 +137,11 @@ class Api {
   }
   updateSettings(settings) {
     return this.httpClient.patch('/settings', settings)
+  }
+
+  // CONTACT
+  async sendMessage(msgObj) {
+    return this.httpClient.post('/contact/send-message', msgObj)
   }
 }
 

@@ -6,6 +6,11 @@ export const admin_menus = {
   SETTINGS: 'settings',
 }
 
+export const customer_menus = {
+  BOOKINGS: 'bookings',
+  SETTINGS: 'settings',
+}
+
 export const FlightStatuses = {
   SCHEDULED: 'scheduled',
   DELAYED: 'delayed',

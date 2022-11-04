@@ -28,7 +28,7 @@
 				Hey! Bienvenue sur<br />Yvanig Agency
 			</h1>
 			<p class="mb-5 text-neutral text-md">Votre plus beau voyage démarre ici !</p>
-			<button class="btn btn-primary rounded-full w-48 text-xs">Découvrir</button>
+			<a class="btn btn-primary rounded-full w-48 text-xs" href="/discover">Découvrir</a>
 		</div>
 		<div class="rightSide w-full hidden lg:block">
 			<div class="card w-full h-fit mt-20 bg-white reservation-card text-neutral">

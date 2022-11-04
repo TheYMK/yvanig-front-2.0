@@ -1,14 +1,14 @@
 <script>
 	import Navbar from '$lib/Navbar/index.svelte'
-	import AdminGuard from '$lib/Guards/AdminGuard.svelte'
 	import Layout from '$lib/Layout.svelte'
-	import AdminSideBarMenu from '$lib/Admin/AdminSideBarMenu.svelte'
 	import Footer from '$lib/Footer/index.svelte'
 	import { page } from '$app/stores'
-	import Content from '$lib/Admin/Content.svelte'
-	import { admin_menus } from '../../../config/constants'
+	import { customer_menus } from '../../../config/constants'
+	import CustomerGuard from '$lib/Guards/CustomerGuard.svelte'
+	import CustomerSideBarMenu from '$lib/Customer/CustomerSideBarMenu.svelte'
+	import Content from '$lib/Customer/Content.svelte'
 
-	let activeMenu = admin_menus.OVERVIEW
+	let activeMenu = customer_menus.OVERVIEW
 
 	$: if ($page.url.hash) {
 		activeMenu = $page.url.hash.replace('#', '')
@@ -17,20 +17,20 @@
 </script>
 
 <Layout>
-	<AdminGuard>
+	<CustomerGuard>
 		<Navbar sticky />
 		<div class="grid grid-cols-4 h-full">
 			<div class="col-span-4 md:col-span-1">
-				<AdminSideBarMenu bind:activeMenu />
+				<CustomerSideBarMenu bind:activeMenu />
 			</div>
-			<div class="w-full col-span-4 md:col-span-3">
+			<div class="w-full col-span-4 md:col-span-3 h-full">
 				<Content contentType={activeMenu} />
 			</div>
 		</div>
 		<div class="">
 			<Footer />
 		</div>
-	</AdminGuard>
+	</CustomerGuard>
 </Layout>
 
 <style>

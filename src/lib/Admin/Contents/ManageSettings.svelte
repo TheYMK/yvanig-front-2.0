@@ -4,6 +4,8 @@
 
 	import UserInfoSetting from './UserInfoSetting.svelte'
 
+	export let userRole = 'sysadmin'
+
 	// your script goes here
 </script>
 
@@ -21,13 +23,15 @@
 		</div>
 		<UserInfoSetting />
 	</div>
-	<div class="mt-20 mb-20">
-		<div>
-			<h1 class="text-2xl font-bold">Système</h1>
-			<div class="h-[5px] mt-2 bg-primary w-36" />
+	{#if userRole === 'sysadmin'}
+		<div class="mt-20 mb-20">
+			<div>
+				<h1 class="text-2xl font-bold">Système</h1>
+				<div class="h-[5px] mt-2 bg-primary w-36" />
+			</div>
+			<SystemSetting />
 		</div>
-		<SystemSetting />
-	</div>
+	{/if}
 </div>
 
 <style>
