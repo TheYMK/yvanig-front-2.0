@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
+
 	export let island_name = ''
 
 	let showDetails = false
@@ -8,7 +10,7 @@
 	class={`island-card w-56 h-64 md-72 md-w-96 lg:w-full lg:h-96 bg-cover object-cover`}
 	class:bg-anjouan-bg={island_name === 'Anjouan'}
 	class:bg-grandecomore-bg={island_name === 'Grande Comore'}
-	class:bg-moheli-bg={island_name === 'Mohéli'}
+	class:bg-moheli-bg={island_name === 'Moheli'}
 	class:bg-mayotte-bg={island_name === 'Mayotte'}
 	on:mouseenter={() => (showDetails = true)}
 	on:mouseleave={() => (showDetails = false)}
@@ -20,7 +22,10 @@
 		<div class="w-24 bg-white h-[2px] mt-4" class:hidden={!showDetails} />
 		<button
 			class="btn btn-primary rounded-full lg:w-48 w-36 text-xs mt-8"
-			class:hidden={!showDetails}>Découvrir</button
+			class:hidden={!showDetails}
+			on:click={() => {
+				goto(`/discover?filterByDestination=${island_name}`)
+			}}>Découvrir</button
 		>
 	</div>
 </div>

@@ -50,8 +50,12 @@ class Api {
   }
 
   // FLIGHT
-  async getFlights(page = 0, limit = 10) {
-    return this.httpClient.get(`/flights?page=${page}&limit=${limit}`)
+  async getFlights(page = 0, limit = 10, filters = null) {
+    if (filters === null) {
+      return this.httpClient.get(`/flights?page=${page}&limit=${limit}`)
+    } else {
+      return this.httpClient.get(`/flights?page=${page}&limit=${limit}&filterByOrigin=${filters.filterByOrigin}&filterByDestination=${filters.filterByDestination}&filterByDepartureDate=${filters.filterByDepartureDate}`)
+    }
   }
 
   async createFlight(data) {
@@ -114,6 +118,9 @@ class Api {
   async getBookings(page = 0, limit = 10) {
     return this.httpClient.get('/bookings')
   }
+  async getBookingsByUser(page = 0, limit = 10) {
+    return this.httpClient.get('/bookings/me')
+  }
   async updateBooking(id, data) {
     return this.httpClient.patch(`/bookings/${id}`, data)
   }
@@ -130,6 +137,11 @@ class Api {
   }
   updateSettings(settings) {
     return this.httpClient.patch('/settings', settings)
+  }
+
+  // CONTACT
+  async sendMessage(msgObj) {
+    return this.httpClient.post('/contact/send-message', msgObj)
   }
 }
 

@@ -4,24 +4,21 @@
 
 <footer class="p-10 footer bg-white border-t-[1px] border-gray-200 text-neutral">
 	<div>
-		<span class="footer-title">Services</span>
-		<a href="/" class="hover:text-primary">Branding</a>
-		<a href="/" class="hover:text-primary">Design</a>
-		<a href="/" class="hover:text-primary">Marketing</a>
-		<a href="/" class="hover:text-primary">Advertisement</a>
+		<span class="footer-title">Nos Services</span>
+		<a href="/services/trips" class="hover:text-primary">Billets d'avion</a>
+		<a href="/services/insurances" class="hover:text-primary">Assurance voyage</a>
+		<a href="/services/visas" class="hover:text-primary">Visa et hébérgement</a>
+		<a href="/services/rentings" class="hover:text-primary">Locations de voiture</a>
 	</div>
 	<div>
-		<span class="footer-title">Company</span>
-		<a href="/" class="hover:text-primary">About us</a>
-		<a href="/" class="hover:text-primary">Contact</a>
-		<a href="/" class="hover:text-primary">Jobs</a>
-		<a href="/" class="hover:text-primary">Press kit</a>
+		<span class="footer-title">L'agence</span>
+		<a href="/about" class="hover:text-primary">À propos</a>
+		<a href="/contact" class="hover:text-primary">Contact</a>
 	</div>
 	<div>
-		<span class="footer-title">Legal</span>
-		<a href="/" class="hover:text-primary">Terms of use</a>
-		<a href="/" class="hover:text-primary">Privacy policy</a>
-		<a href="/" class="hover:text-primary">Cookie policy</a>
+		<span class="footer-title">Autres</span>
+		<a href="/" class="hover:text-primary">Mentions légales</a>
+		<a href="/" class="hover:text-primary">Politique de confidentialité </a>
 	</div>
 </footer>
 <footer class="px-10 py-4 footer bg-primary text-neutral">

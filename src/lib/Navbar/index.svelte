@@ -92,15 +92,15 @@
 							Découvrir
 						</a>
 						<a
-							href="/"
+							href="/services"
 							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
 								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}
 						>
-							Visa et Hébérgement
+							Nos Services
 						</a>
 						<a
-							href="/"
+							href="/contact"
 							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
 								y <= 50 && !isMobileMenuOpen && !sticky ? 'hover:text-primary' : 'hover:text-white'
 							}`}

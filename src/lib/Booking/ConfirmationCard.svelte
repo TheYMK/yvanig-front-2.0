@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { ClassTypes, DocumentTypes, FlightStatuses, Genders } from '../../config/constants'
+	import {
+		ClassTypes,
+		DocumentTypes,
+		FlightStatuses,
+		Genders,
+		PaymentMethods
+	} from '../../config/constants'
 	import userStore from '../../stores/user'
 	import { createEventDispatcher } from 'svelte'
 	import settingsStore from '../../stores/settingsStore'
@@ -81,6 +87,20 @@
 				</span>
 			</div>
 			<div class="flex flex-row justify-between text-sm flex-wrap">
+				<span class="font-bold">Moyen de paiement séléctionné:</span>
+				<span>
+					{#if booking.payment_method === PaymentMethods.BANK_CARD}
+						Carte bancaire
+					{:else if booking.payment_method === PaymentMethods.MONEYGRAM}
+						Moneygramm
+					{:else if booking.payment_method === PaymentMethods.PAYPAL}
+						Paypal
+					{:else if booking.payment_method === PaymentMethods.WESTERN_UNION}
+						Western Union
+					{/if}
+				</span>
+			</div>
+			<div class="flex flex-row justify-between text-sm flex-wrap">
 				<span class="font-bold">Siège:</span>
 				<span>{seat.seat_number}</span>
 			</div>
@@ -94,6 +114,10 @@
 			<div class="flex flex-row justify-between text-sm flex-wrap">
 				<span class="font-bold">Date de naissance:</span>
 				<span>{booking.date_of_birth}</span>
+			</div>
+			<div class="flex flex-row justify-between text-sm flex-wrap">
+				<span class="font-bold">Tel:</span>
+				<span>{booking.phone_number}</span>
 			</div>
 			<div class="flex flex-row justify-between text-sm flex-wrap">
 				<span class="font-bold">Type de document:</span>

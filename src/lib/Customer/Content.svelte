@@ -3,15 +3,12 @@
 
 	import { onMount } from 'svelte'
 
-	import { admin_menus } from '../../config/constants'
-	import ManageBookings from './Contents/ManageBookings.svelte'
-	import ManageFlights from './Contents/ManageFlights.svelte'
-	import ManageSettings from './Contents/ManageSettings.svelte'
+	import { customer_menus } from '../../config/constants'
 	import { notificationCenter } from '../../config/notification'
-	import Overview from './Contents/Overview.svelte'
-	import ManageBlogs from './Contents/ManageBlogs.svelte'
+	import MyBookings from './Contents/MyBookings.svelte'
+	import ManageSettings from '$lib/Admin/Contents/ManageSettings.svelte'
 
-	export let contentType = admin_menus.OVERVIEW
+	export let contentType = customer_menus.BOOKINGS
 
 	let isEmailVerified = false
 	let foundEmail = null
@@ -82,20 +79,11 @@
 			</button>
 		</div>
 	{:else}
-		{#if contentType === admin_menus.OVERVIEW}
-			<Overview />
+		{#if contentType === customer_menus.BOOKINGS}
+			<MyBookings />
 		{/if}
-		{#if contentType === admin_menus.FLIGHTS}
-			<ManageFlights />
-		{/if}
-		{#if contentType === admin_menus.BOOKINGS}
-			<ManageBookings />
-		{/if}
-		{#if contentType === admin_menus.BLOGS}
-			<ManageBlogs />
-		{/if}
-		{#if contentType === admin_menus.SETTINGS}
-			<ManageSettings />
+		{#if contentType === customer_menus.SETTINGS}
+			<ManageSettings userRole="customer" />
 		{/if}
 	{/if}
 </div>

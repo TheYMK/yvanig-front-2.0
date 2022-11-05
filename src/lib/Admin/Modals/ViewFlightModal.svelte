@@ -64,12 +64,12 @@
 					<!--  -->
 					<div class="col-span-6 lg:col-span-3">
 						<span class="text-sm"
-							><strong>Pays d'origine:</strong><br /> {selectedFlight.origin}</span
+							><strong>Lieu d'origine:</strong><br /> {selectedFlight.origin}</span
 						>
 					</div>
 					<div class="col-span-6 lg:col-span-3">
 						<span class="text-sm"
-							><strong>Pays de destination:</strong><br /> {selectedFlight.destination}</span
+							><strong>Lieu de destination:</strong><br /> {selectedFlight.destination}</span
 						>
 					</div>
 					<!--  -->

@@ -15,7 +15,7 @@
 	export let selectedSeat = null
 	export let selectedOffer = null
 
-	let selectedPaymentMethod = null
+	let payment_method = null
 
 	const dispatch = createEventDispatcher()
 </script>
@@ -27,10 +27,10 @@
 			<div class="flex flex-row justify-center gap-10 flex-wrap">
 				<button
 					class={`w-48 border-b-4 flex flex-col items-center ${
-						selectedPaymentMethod === PaymentMethods.BANK_CARD ? 'border-primary text-primary' : ''
+						payment_method === PaymentMethods.BANK_CARD ? 'border-primary text-primary' : ''
 					}`}
 					on:click={() => {
-						selectedPaymentMethod = PaymentMethods.BANK_CARD
+						payment_method = PaymentMethods.BANK_CARD
 					}}
 				>
 					<div class="flex flex-row gap-2">
@@ -41,10 +41,10 @@
 				</button>
 				<button
 					class={`w-48 border-b-4 flex flex-col items-center ${
-						selectedPaymentMethod === PaymentMethods.PAYPAL ? 'border-primary text-primary' : ''
+						payment_method === PaymentMethods.PAYPAL ? 'border-primary text-primary' : ''
 					}`}
 					on:click={() => {
-						selectedPaymentMethod = PaymentMethods.PAYPAL
+						payment_method = PaymentMethods.PAYPAL
 					}}
 				>
 					<div class="flex flex-row gap-2">
@@ -54,10 +54,10 @@
 				</button>
 				<button
 					class={`w-48 border-b-4 flex flex-col items-center ${
-						selectedPaymentMethod === PaymentMethods.MONEYGRAM ? 'border-primary text-primary' : ''
+						payment_method === PaymentMethods.MONEYGRAM ? 'border-primary text-primary' : ''
 					}`}
 					on:click={() => {
-						selectedPaymentMethod = PaymentMethods.MONEYGRAM
+						payment_method = PaymentMethods.MONEYGRAM
 					}}
 				>
 					<div class="flex flex-row gap-2">
@@ -67,12 +67,10 @@
 				</button>
 				<button
 					class={`w-48 border-b-4 flex flex-col items-center ${
-						selectedPaymentMethod === PaymentMethods.WESTERN_UNION
-							? 'border-primary text-primary'
-							: ''
+						payment_method === PaymentMethods.WESTERN_UNION ? 'border-primary text-primary' : ''
 					}`}
 					on:click={() => {
-						selectedPaymentMethod = PaymentMethods.WESTERN_UNION
+						payment_method = PaymentMethods.WESTERN_UNION
 					}}
 				>
 					<div class="flex flex-row gap-2">
@@ -84,16 +82,16 @@
 		</div>
 	</div>
 	<!-- content -->
-	{#if selectedPaymentMethod === PaymentMethods.BANK_CARD}
+	{#if payment_method === PaymentMethods.BANK_CARD}
 		<BankCardPayment />
 	{/if}
-	{#if selectedPaymentMethod === PaymentMethods.PAYPAL}
+	{#if payment_method === PaymentMethods.PAYPAL}
 		<PaypalPayment />
 	{/if}
-	{#if selectedPaymentMethod === PaymentMethods.MONEYGRAM}
+	{#if payment_method === PaymentMethods.MONEYGRAM}
 		<MoneygramPayment />
 	{/if}
-	{#if selectedPaymentMethod === PaymentMethods.WESTERN_UNION}
+	{#if payment_method === PaymentMethods.WESTERN_UNION}
 		<WesternUnionPayment />
 	{/if}
 
@@ -109,11 +107,11 @@
 			>
 			<button
 				class="btn btn-primary"
-				disabled={!selectedPaymentMethod}
+				disabled={!payment_method}
 				on:click={(e) => {
 					e.preventDefault()
 					dispatch('nextStep', {
-						selectedPaymentMethod: selectedPaymentMethod
+						payment_method: payment_method
 					})
 				}}>Suivant<i class="fa-solid fa-angle-right ml-2" /></button
 			>

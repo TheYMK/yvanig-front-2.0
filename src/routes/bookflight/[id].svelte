@@ -27,13 +27,14 @@
 	let bookingValues = {
 		document_type: null,
 		document_number: null,
+		phone_number: null,
 		date_of_birth: null,
 		gender: null,
 		booking_type: 'flight',
 		flightId: null,
 		seatId: null,
 		selectedOffer: null,
-		selectedPaymentMethod: null
+		payment_method: null
 	}
 
 	bookingStore.subscribe((store) => {
@@ -74,6 +75,7 @@
 			if (
 				!e.detail.document_type ||
 				!e.detail.document_number ||
+				!e.detail.phone_number ||
 				!e.detail.date_of_birth ||
 				!e.detail.gender
 			) {
@@ -95,7 +97,7 @@
 		}
 
 		if (currentStep === 4) {
-			if (!e.detail.selectedPaymentMethod) {
+			if (!e.detail.payment_method) {
 				notificationCenter.displayErrorNotification('Vous devez choisir un méthode de paiement.')
 				return
 			}
@@ -108,13 +110,14 @@
 			if (
 				!bookingValues.document_type ||
 				!bookingValues.document_number ||
+				!bookingValues.phone_number ||
 				!bookingValues.date_of_birth ||
 				!bookingValues.gender ||
 				!bookingValues.booking_type ||
 				!bookingValues.flightId ||
 				!bookingValues.seatId ||
 				!bookingValues.selectedOffer ||
-				!bookingValues.selectedPaymentMethod
+				!bookingValues.payment_method
 			) {
 				notificationCenter.displayErrorNotification(
 					'Un ou plusieurs champs sont manquants. Veuillez les remplir.'
@@ -159,6 +162,7 @@
 				...bookingValues,
 				document_type: null,
 				document_number: null,
+				phone_number: null,
 				date_of_birth: null,
 				gender: null
 			})
@@ -173,7 +177,7 @@
 		if (currentStep === 5) {
 			bookingStore.updateBooking({
 				...bookingValues,
-				selectedPaymentMethod: null
+				payment_method: null
 			})
 		}
 	}

@@ -2,6 +2,12 @@ export const admin_menus = {
   OVERVIEW: 'overview',
   FLIGHTS: 'flights',
   BOOKINGS: 'bookings',
+  BLOGS: 'blogs',
+  SETTINGS: 'settings',
+}
+
+export const customer_menus = {
+  BOOKINGS: 'bookings',
   SETTINGS: 'settings',
 }
 
