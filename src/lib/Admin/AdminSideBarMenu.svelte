@@ -1,11 +1,11 @@
 <script>
-		// @ts-nocheck
-	import { admin_menus } from '../../config/constants'
+	// @ts-nocheck
+	import { admin_menus } from '../../config/constants';
 
-	import userStore from '../../stores/user'
+	import userStore from '../../stores/user';
 
-	let isMobileMenuOpened = false
-	export let activeMenu = admin_menus.OVERVIEW
+	let isMobileMenuOpened = false;
+	export let activeMenu = admin_menus.OVERVIEW;
 </script>
 
 <!-- On large size -->
@@ -27,9 +27,9 @@
 			<a href={`#${admin_menus.BOOKINGS}`} class="hover:bg-primary hover:text-white">Réservations</a
 			>
 		</li>
-		<li class:bordered={activeMenu === admin_menus.BLOGS}>
+		<!-- <li class:bordered={activeMenu === admin_menus.BLOGS}>
 			<a href={`#${admin_menus.BLOGS}`} class="hover:bg-primary hover:text-white">Blogs</a>
-		</li>
+		</li> -->
 		<li class:bordered={activeMenu === admin_menus.SETTINGS}>
 			<a href={`#${admin_menus.SETTINGS}`} class="hover:bg-primary hover:text-white">Paramètres</a>
 		</li>

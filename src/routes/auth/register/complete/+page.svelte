@@ -1,61 +1,61 @@
 <script lang="ts">
 	// @ts-nocheck
-	import Navbar from '$lib/Navbar/index.svelte'
-	import Footer from '$lib/Footer/index.svelte'
-	import Input from '$lib/UI/Input.svelte'
-	import { page } from '$app/stores'
-	import { onMount } from 'svelte'
-	import jwt_decode from 'jwt-decode'
-	import { notificationCenter } from '../../../../config/notification'
-	import { api } from '../../../../api/Api'
-	import { goto } from '$app/navigation'
-	import Layout from '$lib/Layout.svelte'
+	import Navbar from '$lib/Navbar/index.svelte';
+	import Footer from '$lib/Footer/index.svelte';
+	import Input from '$lib/UI/Input.svelte';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import jwt_decode from 'jwt-decode';
+	import { notificationCenter } from '../../../../config/notification';
+	import { api } from '../../../../api/Api';
+	import { goto } from '$app/navigation';
+	import Layout from '$lib/Layout.svelte';
 
 	let data = {
 		first_name: '',
 		last_name: '',
 		password: '',
 		token: ''
-	}
-	let email = ''
-	let repeat_password = ''
+	};
+	let email = '';
+	let repeat_password = '';
 
 	let errors = {
 		password: '',
 		passwordMatch: ''
-	}
-	let loading = false
+	};
+	let loading = false;
 
 	$: if (data.password !== repeat_password) {
 		errors = {
 			...errors,
 			passwordMatch: 'Les mots de passe ne correspondent pas.'
-		}
+		};
 	} else {
 		errors = {
 			...errors,
 			passwordMatch: ''
-		}
+		};
 	}
 
 	const onPasswordChange = (e: any) => {
-		data.password = e.target.value
+		data.password = e.target.value;
 		if (data.password.length < 6) {
 			errors = {
 				...errors,
 				password: "Veuillez renseigner un mot de passe d'au moins 6 caractères."
-			}
+			};
 		} else {
 			errors = {
 				...errors,
 				password: ''
-			}
+			};
 		}
-	}
+	};
 
 	const onSubmit = async (e: any) => {
-		loading = true
-		e.preventDefault()
+		loading = true;
+		e.preventDefault();
 
 		if (
 			!data.first_name ||
@@ -65,33 +65,37 @@
 			errors.password ||
 			errors.passwordMatch
 		) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.');
+			loading = false;
+			return;
 		}
 
 		try {
-			await api.register(data)
-			notificationCenter.displaySuccessNotification('Votre compte a bien été créé.')
-			goto('/')
+			await api.register(data);
+			notificationCenter.displaySuccessNotification('Votre compte a bien été créé.');
+			goto('/');
 		} catch (err) {
 			if (err.response?.data?.statusCode === 400) {
 				notificationCenter.displayErrorNotification(
 					"Nous n'avons pas pu créer votre compte. Veuillez réessayer plus tard."
-				)
+				);
 			} else {
-				notificationCenter.displayErrorNotification('Une erreur est survenue.')
+				notificationCenter.displayErrorNotification('Une erreur est survenue.');
 			}
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 	onMount(() => {
-		data.token = $page.url.searchParams.get('token')
+		data.token = $page.url.searchParams.get('token');
 		// @ts-ignore
-		email = jwt_decode(data.token).email
-	})
+		email = jwt_decode(data.token).email;
+	});
 </script>
+
+<svelte:head>
+	<title>Yvanig Agency</title>
+</svelte:head>
 
 <Layout>
 	<Navbar />
@@ -113,7 +117,7 @@
 								value={email}
 								on:input={(e) => {
 									// @ts-ignore
-									data.last_name = e.target.value
+									data.last_name = e.target.value;
 								}}
 							/>
 						</div>
@@ -127,7 +131,7 @@
 								value={data.last_name}
 								on:input={(e) => {
 									// @ts-ignore
-									data.last_name = e.target.value
+									data.last_name = e.target.value;
 								}}
 							/>
 						</div>
@@ -141,7 +145,7 @@
 								value={data.first_name}
 								on:input={(e) => {
 									// @ts-ignore
-									data.first_name = e.target.value
+									data.first_name = e.target.value;
 								}}
 							/>
 						</div>
@@ -166,7 +170,7 @@
 								value={repeat_password}
 								on:input={(e) => {
 									// @ts-ignore
-									repeat_password = e.target.value
+									repeat_password = e.target.value;
 								}}
 							/>
 						</div>

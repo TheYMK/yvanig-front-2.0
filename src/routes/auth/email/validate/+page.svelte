@@ -1,50 +1,54 @@
 <script lang="ts">
 	// @ts-nocheck
-	import Navbar from '../../../../lib/Navbar/index.svelte'
-	import Footer from '../../../../lib/Footer/index.svelte'
-	import Input from '../../../../lib/UI/Input.svelte'
-	import { page } from '$app/stores'
-	import { onMount } from 'svelte'
-	import jwt_decode from 'jwt-decode'
-	import { notificationCenter } from '../../../../config/notification'
-	import { api } from '../../../../api/Api'
-	import { goto } from '$app/navigation'
-	import Layout from '../../../../lib/Layout.svelte'
+	import Navbar from '../../../../lib/Navbar/index.svelte';
+	import Footer from '../../../../lib/Footer/index.svelte';
+	import Input from '../../../../lib/UI/Input.svelte';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import jwt_decode from 'jwt-decode';
+	import { notificationCenter } from '../../../../config/notification';
+	import { api } from '../../../../api/Api';
+	import { goto } from '$app/navigation';
+	import Layout from '../../../../lib/Layout.svelte';
 
 	let data = {
 		token: ''
-	}
-	let email = ''
+	};
+	let email = '';
 
-	let loading = false
+	let loading = false;
 
 	const onSubmit = async (e: any) => {
-		loading = true
-		e.preventDefault()
+		loading = true;
+		e.preventDefault();
 
 		if (!data.token) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.');
+			loading = false;
+			return;
 		}
 
 		try {
-			await api.verifyEmail(data)
+			await api.verifyEmail(data);
 
-			notificationCenter.displaySuccessNotification('Votre email a bien été vérifié.')
-			goto('/')
+			notificationCenter.displaySuccessNotification('Votre email a bien été vérifié.');
+			goto('/');
 		} catch (err) {
-			notificationCenter.displayErrorNotification('Une erreur est survenue.')
+			notificationCenter.displayErrorNotification('Une erreur est survenue.');
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 	onMount(() => {
-		data.token = $page.url.searchParams.get('token')
+		data.token = $page.url.searchParams.get('token');
 		// @ts-ignore
-		email = jwt_decode(data.token).email
-	})
+		email = jwt_decode(data.token).email;
+	});
 </script>
+
+<svelte:head>
+	<title>Yvanig Agency</title>
+</svelte:head>
 
 <Layout>
 	<Navbar />
@@ -66,7 +70,7 @@
 								value={email}
 								on:input={(e) => {
 									// @ts-ignore
-									data.last_name = e.target.value
+									data.last_name = e.target.value;
 								}}
 							/>
 						</div>

@@ -1,58 +1,62 @@
 <script lang="ts">
 	// @ts-nocheck
-	import Navbar from '../../../../lib/Navbar/index.svelte'
-	import Footer from '../../../../lib/Footer/index.svelte'
-	import Input from '../../../../lib/UI/Input.svelte'
-	import { notificationCenter } from '../../../../config/notification'
-	import { isEmailValid } from '../../../../config/helpers'
-	import { api } from '../../../../api/Api'
-	import Layout from '../../../../lib/Layout.svelte'
+	import Navbar from '../../../../lib/Navbar/index.svelte';
+	import Footer from '../../../../lib/Footer/index.svelte';
+	import Input from '../../../../lib/UI/Input.svelte';
+	import { notificationCenter } from '../../../../config/notification';
+	import { isEmailValid } from '../../../../config/helpers';
+	import { api } from '../../../../api/Api';
+	import Layout from '../../../../lib/Layout.svelte';
 
 	let data = {
 		email: ''
-	}
+	};
 
 	let errors = {
 		email: ''
-	}
-	let loading = false
+	};
+	let loading = false;
 
 	const onEmailChange = (e: any) => {
-		data.email = e.target.value
+		data.email = e.target.value;
 		if (!isEmailValid(data.email)) {
-			errors = { ...errors, email: 'Veuillez renseigner un email valide.' }
+			errors = { ...errors, email: 'Veuillez renseigner un email valide.' };
 		} else {
-			errors = { ...errors, email: '' }
+			errors = { ...errors, email: '' };
 		}
-	}
+	};
 
 	const onSubmit = async (e: any) => {
-		e.preventDefault()
-		loading = true
+		e.preventDefault();
+		loading = true;
 		if (!data.email || errors.email) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner un email valide.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner un email valide.');
+			loading = false;
+			return;
 		}
 
 		try {
-			await api.sendPasswordResetEmail(data.email)
+			await api.sendPasswordResetEmail(data.email);
 			notificationCenter.displaySuccessNotification(
 				'Un lien de réinitialisation de mot de passe vous a été envoyé.'
-			)
+			);
 		} catch (err) {
 			if (err.response?.data?.statusCode === 400) {
 				notificationCenter.displayErrorNotification(
 					"Nous n'avons pas pu vous envoyer un lien de réinitialisation. Veuillez réessayer plus tard."
-				)
+				);
 			} else {
-				notificationCenter.displayErrorNotification('Une erreur est survenue.')
+				notificationCenter.displayErrorNotification('Une erreur est survenue.');
 			}
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 </script>
+
+<svelte:head>
+	<title>Yvanig Agency - Réinitialiser votre mot de passe</title>
+</svelte:head>
 
 <Layout>
 	<Navbar />

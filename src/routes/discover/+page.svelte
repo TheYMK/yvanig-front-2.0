@@ -1,55 +1,59 @@
 <script lang="ts">
-	import Navbar from '../../lib/Navbar/index.svelte'
-	import Footer from '../../lib/Footer/index.svelte'
-	import Hotel from '../../lib/Hotel/index.svelte'
-	import Trip from '../../lib/Trip/index.svelte'
-	import Layout from '../../lib/Layout.svelte'
-	import { api } from '../../api/Api'
-	import { notificationCenter } from '../../config/notification'
-	import { onMount } from 'svelte'
-	import GenericHero from '../../lib/UI/GenericHero.svelte'
-	import { page as pageStore } from '$app/stores'
+	import Navbar from '../../lib/Navbar/index.svelte';
+	import Footer from '../../lib/Footer/index.svelte';
+	import Hotel from '../../lib/Hotel/index.svelte';
+	import Trip from '../../lib/Trip/index.svelte';
+	import Layout from '../../lib/Layout.svelte';
+	import { api } from '../../api/Api';
+	import { notificationCenter } from '../../config/notification';
+	import { onMount } from 'svelte';
+	import GenericHero from '../../lib/UI/GenericHero.svelte';
+	import { page as pageStore } from '$app/stores';
 
-	let limit = 8
-	let page = 0
-	let loading = false
-	let flights: any = []
-	let total = 0
+	let limit = 8;
+	let page = 0;
+	let loading = false;
+	let flights: any = [];
+	let total = 0;
 
 	const loadFlights = async (page: any, limit: any) => {
-		loading = true
+		loading = true;
 		try {
 			let filters = {
 				filterByOrigin: $pageStore.url.searchParams.get('filterByOrigin') ?? '',
 				filterByDestination: $pageStore.url.searchParams.get('filterByDestination') ?? '',
 				filterByDepartureDate: $pageStore.url.searchParams.get('filterByDepartureDate') ?? ''
-			}
+			};
 			// @ts-ignore
-			const response = await api.getFlights(page, limit, filters)
-			flights = [...flights, ...response.data.flights]
-			total = response.data?.total_count
+			const response = await api.getFlights(page, limit, filters);
+			flights = [...flights, ...response.data.flights];
+			total = response.data?.total_count;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 			notificationCenter.displayErrorNotification(
 				'Une erreur est survenue lors du chargement des vols.'
-			)
+			);
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 
 	const loadMore = () => {
-		page++
-		loadFlights(page, limit)
-	}
+		page++;
+		loadFlights(page, limit);
+	};
 
 	onMount(() => {
-		loadFlights(page, limit)
-	})
+		loadFlights(page, limit);
+	});
 </script>
 
+<svelte:head>
+	<title>Yvanig Agency - Découvrir</title>
+</svelte:head>
+
 <Layout>
-	<Navbar />
+	<Navbar darkLink={true} />
 	<GenericHero
 		title="Découvrir"
 		titleClassName="text-3xl lg:text-6xl"

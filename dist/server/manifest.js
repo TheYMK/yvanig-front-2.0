@@ -1,27 +1,31 @@
 const manifest = {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set(["favicon.png"]),
-	mimeTypes: {".png":"image/png"},
+	assets: new Set(["android-chrome-192x192.png","android-chrome-512x512.png","apple-touch-icon.png","favicon-16x16.png","favicon-32x32.png","favicon.ico","site.webmanifest"]),
+	mimeTypes: {".png":"image/png",".ico":"image/vnd.microsoft.icon",".webmanifest":"application/manifest+json"},
 	_: {
-		entry: {"file":"_app/immutable/start-ddd82b04.js","imports":["_app/immutable/start-ddd82b04.js","_app/immutable/chunks/index-a8b8d47a.js","_app/immutable/chunks/singletons-32b54b54.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-59befb2b.js","imports":["_app/immutable/start-59befb2b.js","_app/immutable/chunks/index-238b7a49.js","_app/immutable/chunks/singletons-df46876e.js"],"stylesheets":[]},
 		nodes: [
-			() => import('./chunks/0-5f259f25.js'),
-			() => import('./chunks/1-e320147b.js'),
-			() => import('./chunks/2-d0e3047f.js'),
-			() => import('./chunks/3-fed8497c.js'),
-			() => import('./chunks/4-8c2aa665.js'),
-			() => import('./chunks/5-a036e15e.js'),
-			() => import('./chunks/6-fd185cb8.js'),
-			() => import('./chunks/7-c52bb6a6.js'),
-			() => import('./chunks/8-13baa738.js'),
-			() => import('./chunks/9-42fe83c3.js'),
-			() => import('./chunks/10-3f25adae.js'),
-			() => import('./chunks/11-88688b96.js'),
-			() => import('./chunks/12-caad2d3d.js'),
-			() => import('./chunks/13-39d303a3.js'),
-			() => import('./chunks/14-6a0211a2.js'),
-			() => import('./chunks/15-369b70bb.js')
+			() => import('./chunks/0-67b5ccdc.js'),
+			() => import('./chunks/1-e8dabaab.js'),
+			() => import('./chunks/2-73513f98.js'),
+			() => import('./chunks/3-86d31b08.js'),
+			() => import('./chunks/4-869918cf.js'),
+			() => import('./chunks/5-8baa7095.js'),
+			() => import('./chunks/6-b52568b0.js'),
+			() => import('./chunks/7-2015f796.js'),
+			() => import('./chunks/8-71170abb.js'),
+			() => import('./chunks/9-a81f4387.js'),
+			() => import('./chunks/10-42a301bc.js'),
+			() => import('./chunks/11-3083753e.js'),
+			() => import('./chunks/12-a94dd263.js'),
+			() => import('./chunks/13-ab60dbd4.js'),
+			() => import('./chunks/14-228ed919.js'),
+			() => import('./chunks/15-646c9ff8.js'),
+			() => import('./chunks/16-c5056de9.js'),
+			() => import('./chunks/17-2de7e047.js'),
+			() => import('./chunks/18-eb6193b0.js'),
+			() => import('./chunks/19-862d1a00.js')
 		],
 		routes: [
 			{
@@ -34,12 +38,21 @@ const manifest = {
 				endpoint: null
 			},
 			{
+				id: "/about",
+				pattern: /^\/about\/?$/,
+				names: [],
+				types: [],
+				optional: [],
+				page: { layouts: [0], errors: [1], leaf: 3 },
+				endpoint: null
+			},
+			{
 				id: "/admin/account",
 				pattern: /^\/admin\/account\/?$/,
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 3 },
+				page: { layouts: [0], errors: [1], leaf: 4 },
 				endpoint: null
 			},
 			{
@@ -48,7 +61,7 @@ const manifest = {
 				names: ["id"],
 				types: [null],
 				optional: [false],
-				page: { layouts: [0], errors: [1], leaf: 4 },
+				page: { layouts: [0], errors: [1], leaf: 5 },
 				endpoint: null
 			},
 			{
@@ -57,7 +70,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 5 },
+				page: { layouts: [0], errors: [1], leaf: 6 },
 				endpoint: null
 			},
 			{
@@ -66,7 +79,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 6 },
+				page: { layouts: [0], errors: [1], leaf: 7 },
 				endpoint: null
 			},
 			{
@@ -75,7 +88,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 7 },
+				page: { layouts: [0], errors: [1], leaf: 8 },
 				endpoint: null
 			},
 			{
@@ -84,7 +97,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 8 },
+				page: { layouts: [0], errors: [1], leaf: 9 },
 				endpoint: null
 			},
 			{
@@ -93,7 +106,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 9 },
+				page: { layouts: [0], errors: [1], leaf: 10 },
 				endpoint: null
 			},
 			{
@@ -102,7 +115,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 10 },
+				page: { layouts: [0], errors: [1], leaf: 11 },
 				endpoint: null
 			},
 			{
@@ -111,7 +124,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 11 },
+				page: { layouts: [0], errors: [1], leaf: 12 },
 				endpoint: null
 			},
 			{
@@ -120,7 +133,7 @@ const manifest = {
 				names: ["id"],
 				types: [null],
 				optional: [false],
-				page: { layouts: [0], errors: [1], leaf: 12 },
+				page: { layouts: [0], errors: [1], leaf: 13 },
 				endpoint: null
 			},
 			{
@@ -129,7 +142,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 13 },
+				page: { layouts: [0], errors: [1], leaf: 14 },
 				endpoint: null
 			},
 			{
@@ -138,7 +151,34 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 14 },
+				page: { layouts: [0], errors: [1], leaf: 15 },
+				endpoint: null
+			},
+			{
+				id: "/legal-mentions",
+				pattern: /^\/legal-mentions\/?$/,
+				names: [],
+				types: [],
+				optional: [],
+				page: { layouts: [0], errors: [1], leaf: 16 },
+				endpoint: null
+			},
+			{
+				id: "/privacy",
+				pattern: /^\/privacy\/?$/,
+				names: [],
+				types: [],
+				optional: [],
+				page: { layouts: [0], errors: [1], leaf: 17 },
+				endpoint: null
+			},
+			{
+				id: "/services",
+				pattern: /^\/services\/?$/,
+				names: [],
+				types: [],
+				optional: [],
+				page: { layouts: [0], errors: [1], leaf: 18 },
 				endpoint: null
 			},
 			{
@@ -147,7 +187,7 @@ const manifest = {
 				names: [],
 				types: [],
 				optional: [],
-				page: { layouts: [0], errors: [1], leaf: 15 },
+				page: { layouts: [0], errors: [1], leaf: 19 },
 				endpoint: null
 			}
 		],

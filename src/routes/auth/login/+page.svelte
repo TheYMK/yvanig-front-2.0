@@ -1,95 +1,99 @@
 <script lang="ts">
 	// @ts-nocheck
-	import Navbar from '../../../lib/Navbar/index.svelte'
-	import Footer from '../../../lib/Footer/index.svelte'
-	import Input from '../../../lib/UI/Input.svelte'
-	import { notificationCenter } from '../../../config/notification'
-	import { api } from '../../../api/Api'
-	import { isEmailValid } from '../../../config/helpers'
-	import { goto } from '$app/navigation'
-	import Layout from '../../../lib/Layout.svelte'
-	import { page } from '$app/stores'
+	import Navbar from '../../../lib/Navbar/index.svelte';
+	import Footer from '../../../lib/Footer/index.svelte';
+	import Input from '../../../lib/UI/Input.svelte';
+	import { notificationCenter } from '../../../config/notification';
+	import { api } from '../../../api/Api';
+	import { isEmailValid } from '../../../config/helpers';
+	import { goto } from '$app/navigation';
+	import Layout from '../../../lib/Layout.svelte';
+	import { page } from '$app/stores';
 
 	let data = {
 		email: '',
 		password: ''
-	}
+	};
 
 	let errors = {
 		email: '',
 		password: ''
-	}
+	};
 
-	let loading = false
+	let loading = false;
 
 	const onEmailChange = (e: any) => {
-		data.email = e.target.value
+		data.email = e.target.value;
 		if (!isEmailValid(data.email)) {
-			errors = { ...errors, email: 'Veuillez renseigner un email valide.' }
+			errors = { ...errors, email: 'Veuillez renseigner un email valide.' };
 		} else {
-			errors = { ...errors, email: '' }
+			errors = { ...errors, email: '' };
 		}
-	}
+	};
 
 	const onPasswordChange = (e: any) => {
-		data.password = e.target.value
+		data.password = e.target.value;
 		if (data.password.length < 6) {
 			errors = {
 				...errors,
 				password: "Veuillez renseigner un mot de passe d'au moins 6 caractères."
-			}
+			};
 		} else {
-			errors = { ...errors, password: '' }
+			errors = { ...errors, password: '' };
 		}
-	}
+	};
 
 	const onSubmit = async (e: any) => {
-		loading = true
-		e.preventDefault()
+		loading = true;
+		e.preventDefault();
 
 		if (!data.email || !data.password) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.');
+			loading = false;
+			return;
 		}
 
 		if (!isEmailValid(data.email)) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner un email valide.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner un email valide.');
+			loading = false;
+			return;
 		}
 
 		if (data.password.length < 6) {
 			notificationCenter.displayErrorNotification(
 				"Veuillez renseigner un mot de passe d'au moins 6 caractères."
-			)
-			loading = false
-			return
+			);
+			loading = false;
+			return;
 		}
 
 		try {
-			await api.signin(data)
-			notificationCenter.displaySuccessNotification('Vous êtes maintenant connecté.')
+			await api.signin(data);
+			notificationCenter.displaySuccessNotification('Vous êtes maintenant connecté.');
 			if ($page.url.searchParams.get('from')) {
-				goto($page.url.searchParams.get('from'))
+				goto($page.url.searchParams.get('from'));
 			} else {
-				goto('/')
+				goto('/');
 			}
 		} catch (err) {
 			if (err.response?.data?.statusCode === 404) {
 				notificationCenter.displayErrorNotification(
 					"Aucun compte n'est associé à cette adresse email."
-				)
+				);
 			} else if (err.response?.data?.statusCode === 401) {
-				notificationCenter.displayErrorNotification('Email ou mot de passe incorrect.')
+				notificationCenter.displayErrorNotification('Email ou mot de passe incorrect.');
 			} else {
-				notificationCenter.displayErrorNotification('Une erreur est survenue.')
+				notificationCenter.displayErrorNotification('Une erreur est survenue.');
 			}
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 </script>
+
+<svelte:head>
+	<title>Yvanig Agency - Se connecter</title>
+</svelte:head>
 
 <Layout>
 	<Navbar />

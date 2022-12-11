@@ -1,84 +1,88 @@
 <script lang="ts">
-	import Navbar from '../../lib/Navbar/index.svelte'
-	import Layout from '../../lib/Layout.svelte'
-	import Footer from '../../lib/Footer/index.svelte'
-	import Input from '../../lib/UI/Input.svelte'
-	import { isEmailValid } from '../../config/helpers'
-	import { notificationCenter } from '../../config/notification'
-	import { api } from '../../api/Api'
+	import Navbar from '../../lib/Navbar/index.svelte';
+	import Layout from '../../lib/Layout.svelte';
+	import Footer from '../../lib/Footer/index.svelte';
+	import Input from '../../lib/UI/Input.svelte';
+	import { isEmailValid } from '../../config/helpers';
+	import { notificationCenter } from '../../config/notification';
+	import { api } from '../../api/Api';
 
 	let data = {
 		name: '',
 		email: '',
 		subject: '',
 		message: ''
-	}
+	};
 
 	let errors = {
 		email: '',
 		name: '',
 		subject: '',
 		message: ''
-	}
+	};
 
-	let loading = false
+	let loading = false;
 
 	const onEmailChange = (e: any) => {
-		data.email = e.target.value
+		data.email = e.target.value;
 		if (!isEmailValid(data.email)) {
-			errors = { ...errors, email: 'Veuillez renseigner un email valide.' }
+			errors = { ...errors, email: 'Veuillez renseigner un email valide.' };
 		} else {
-			errors = { ...errors, email: '' }
+			errors = { ...errors, email: '' };
 		}
-	}
+	};
 
 	const onSubmit = async (e: any) => {
-		loading = true
-		e.preventDefault()
+		loading = true;
+		e.preventDefault();
 
 		if (!data.email || !data.name || data.message.length < 50 || !data.subject) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.');
+			loading = false;
+			return;
 		}
 
 		if (!isEmailValid(data.email)) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner un email valide.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner un email valide.');
+			loading = false;
+			return;
 		}
 
 		if (data.message.length > 400) {
 			notificationCenter.displayErrorNotification(
 				'Votre message doit avoir moins de 400 caractères'
-			)
-			loading = false
-			return
+			);
+			loading = false;
+			return;
 		}
 		try {
-			await api.sendMessage(data)
-			notificationCenter.displaySuccessNotification('Vous message a bien été envoyé.')
+			await api.sendMessage(data);
+			notificationCenter.displaySuccessNotification('Vous message a bien été envoyé.');
 			data = {
 				name: '',
 				email: '',
 				subject: '',
 				message: ''
-			}
+			};
 			errors = {
 				email: '',
 				name: '',
 				subject: '',
 				message: ''
-			}
+			};
 		} catch (err) {
 			notificationCenter.displayErrorNotification(
 				"Une erreur est survenue lors de l'envoi de votre message."
-			)
+			);
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 </script>
+
+<svelte:head>
+	<title>Yvanig Agency - Contactez-nous</title>
+</svelte:head>
 
 <Layout>
 	<Navbar sticky />
@@ -100,7 +104,7 @@
 								value={data.name}
 								on:input={(e) => {
 									// @ts-ignore
-									data = { ...data, name: e.target.value }
+									data = { ...data, name: e.target.value };
 								}}
 							/>
 						</div>
@@ -125,7 +129,7 @@
 								value={data.subject}
 								on:input={(e) => {
 									// @ts-ignore
-									data = { ...data, subject: e.target.value }
+									data = { ...data, subject: e.target.value };
 								}}
 							/>
 						</div>
@@ -144,7 +148,7 @@
 								value={data.message}
 								on:input={(e) => {
 									// @ts-ignore
-									data = { ...data, message: e.target.value }
+									data = { ...data, message: e.target.value };
 								}}
 							/>
 						</div>

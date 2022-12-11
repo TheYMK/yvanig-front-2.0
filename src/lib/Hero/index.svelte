@@ -117,7 +117,7 @@
 <style>
 	.background-image {
 		background-image: linear-gradient(360deg, var(--color-base-100) 0%, rgba(255, 18, 250, 0) 10%),
-			url('/src/assets/bg/bg_hero.jpg');
+			url('/src/assets/bg/bg_hero.webp');
 		background-color: var(--color-base-100);
 		background-repeat: no-repeat;
 		background-size: cover;

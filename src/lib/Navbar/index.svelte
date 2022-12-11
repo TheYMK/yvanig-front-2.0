@@ -4,6 +4,7 @@
 	import logo from '../../assets/logo_black.png';
 
 	export let sticky = false;
+	export let darkLink = false;
 	let isMobileMenuOpen = false;
 	let y: any;
 
@@ -75,7 +76,11 @@
 							/>
 						</svg>
 					</button>
-					<div class="flex flex-col items-center lg:flex-row text-white">
+					<div
+						class="flex flex-col items-center lg:flex-row {darkLink
+							? `text-neutral ${y >= 50 && 'text-white'}`
+							: 'text-white'}"
+					>
 						<a
 							href="/"
 							class={`text-2xl mb-5 lg:mb-0 lg:text-sm font-bold mr-5 ml-5 ${
@@ -139,7 +144,7 @@
 										</ul>
 									</div>
 								{:else}
-									<div class="dropdown dropdown-end dropdown-hover">
+									<div class="text-neutral dropdown dropdown-end dropdown-hover">
 										<div
 											tabindex="0"
 											href="/user/account"

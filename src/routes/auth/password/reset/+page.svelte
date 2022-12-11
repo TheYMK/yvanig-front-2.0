@@ -1,91 +1,95 @@
 <script lang="ts">
 	// @ts-nocheck
-	import Navbar from '../../../../lib/Navbar/index.svelte'
-	import Footer from '../../../../lib/Footer/index.svelte'
-	import Input from '../../../../lib/UI/Input.svelte'
-	import { page } from '$app/stores'
-	import { onMount } from 'svelte'
-	import jwt_decode from 'jwt-decode'
-	import { notificationCenter } from '../../../../config/notification'
-	import { api } from '../../../../api/Api'
-	import { goto } from '$app/navigation'
-	import Layout from '../../../../lib/Layout.svelte'
+	import Navbar from '../../../../lib/Navbar/index.svelte';
+	import Footer from '../../../../lib/Footer/index.svelte';
+	import Input from '../../../../lib/UI/Input.svelte';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import jwt_decode from 'jwt-decode';
+	import { notificationCenter } from '../../../../config/notification';
+	import { api } from '../../../../api/Api';
+	import { goto } from '$app/navigation';
+	import Layout from '../../../../lib/Layout.svelte';
 
 	let data = {
 		newPassword: '',
 		token: ''
-	}
-	let email = ''
-	let repeat_password = ''
+	};
+	let email = '';
+	let repeat_password = '';
 	let errors = {
 		password: '',
 		passwordMatch: ''
-	}
-	let loading = false
+	};
+	let loading = false;
 
 	$: if (data.newPassword !== repeat_password) {
 		errors = {
 			...errors,
 			passwordMatch: 'Les mots de passe ne correspondent pas.'
-		}
+		};
 	} else {
 		errors = {
 			...errors,
 			passwordMatch: ''
-		}
+		};
 	}
 
 	const onPasswordChange = (e: any) => {
-		data.newPassword = e.target.value
+		data.newPassword = e.target.value;
 		if (data.newPassword.length < 6) {
 			errors = {
 				...errors,
 				password: "Veuillez renseigner un mot de passe d'au moins 6 caractères."
-			}
+			};
 		} else {
 			errors = {
 				...errors,
 				password: ''
-			}
+			};
 		}
-	}
+	};
 
 	const onSubmit = async (e: any) => {
-		loading = true
-		e.preventDefault()
+		loading = true;
+		e.preventDefault();
 
 		if (!data.newPassword || !data.token || errors.password || errors.passwordMatch) {
-			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.')
-			loading = false
-			return
+			notificationCenter.displayErrorNotification('Veuillez renseigner tous les champs.');
+			loading = false;
+			return;
 		}
 
 		try {
-			await api.passwordReset(data)
-			notificationCenter.displaySuccessNotification('Votre mot de passe a bien été modifié.')
-			goto('/')
+			await api.passwordReset(data);
+			notificationCenter.displaySuccessNotification('Votre mot de passe a bien été modifié.');
+			goto('/');
 		} catch (err) {
 			if (err.response?.data?.statusCode === 400) {
 				notificationCenter.displayErrorNotification(
 					"Nous n'avons pas pu modifier votre mot de passe. Veuillez réessayer plus tard."
-				)
+				);
 			} else if (err.response?.data?.statusCode === 404) {
 				notificationCenter.displayErrorNotification(
 					"Nous n'avons pas pu trouver votre compte. Veuillez réessayer plus tard."
-				)
+				);
 			} else {
-				notificationCenter.displayErrorNotification('Une erreur est survenue.')
+				notificationCenter.displayErrorNotification('Une erreur est survenue.');
 			}
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 	onMount(() => {
-		data.token = $page.url.searchParams.get('token')
+		data.token = $page.url.searchParams.get('token');
 		// @ts-ignore
-		email = jwt_decode(data.token).email
-	})
+		email = jwt_decode(data.token).email;
+	});
 </script>
+
+<svelte:head>
+	<title>Yvanig Agency - Réinitialiser votre mot de passe</title>
+</svelte:head>
 
 <Layout>
 	<Navbar />
@@ -107,7 +111,7 @@
 								value={email}
 								on:input={(e) => {
 									// @ts-ignore
-									data.last_name = e.target.value
+									data.last_name = e.target.value;
 								}}
 							/>
 						</div>
@@ -132,7 +136,7 @@
 								value={repeat_password}
 								on:input={(e) => {
 									// @ts-ignore
-									repeat_password = e.target.value
+									repeat_password = e.target.value;
 								}}
 							/>
 						</div>

@@ -1,41 +1,45 @@
 <script lang="ts">
-	import Navbar from '../lib/Navbar/index.svelte'
-	import Hero from '../lib/Hero/index.svelte'
-	import Island from '../lib/Island/index.svelte'
-	import Footer from '../lib/Footer/index.svelte'
-	import AboutUs from '../lib/AboutUs/index.svelte'
-	import RecentTrips from '../lib/Trip/RecentTrips.svelte'
-	import Layout from '../lib/Layout.svelte'
-	import { onMount } from 'svelte'
-	import { api } from '../api/Api'
-	import { notificationCenter } from '../config/notification'
+	import Navbar from '../lib/Navbar/index.svelte';
+	import Hero from '../lib/Hero/index.svelte';
+	import Island from '../lib/Island/index.svelte';
+	import Footer from '../lib/Footer/index.svelte';
+	import AboutUs from '../lib/AboutUs/index.svelte';
+	import RecentTrips from '../lib/Trip/RecentTrips.svelte';
+	import Layout from '../lib/Layout.svelte';
+	import { onMount } from 'svelte';
+	import { api } from '../api/Api';
+	import { notificationCenter } from '../config/notification';
 
-	let limit = 5
-	let page = 0
-	let loading = false
-	let flights: any = []
-	let total = 0
+	let limit = 5;
+	let page = 0;
+	let loading = false;
+	let flights: any = [];
+	let total = 0;
 
 	const loadFlights = async (page: any, limit: any) => {
-		loading = true
+		loading = true;
 		try {
-			const response = await api.getFlights(page, limit)
-			flights = [...flights, ...response.data.flights]
-			total = response.data?.total_count
+			const response = await api.getFlights(page, limit);
+			flights = [...flights, ...response.data.flights];
+			total = response.data?.total_count;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 			notificationCenter.displayErrorNotification(
 				'Une erreur est survenue lors du chargement des vols.'
-			)
+			);
 		} finally {
-			loading = false
+			loading = false;
 		}
-	}
+	};
 
 	onMount(async () => {
-		loadFlights(page, limit)
-	})
+		loadFlights(page, limit);
+	});
 </script>
+
+<svelte:head>
+	<title>Yvanig Agency - Accueil</title>
+</svelte:head>
 
 <Layout>
 	<Navbar />
