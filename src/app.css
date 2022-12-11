@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	font-family: 'Montserrat', 'DejaVu Sans', Verdana, sans-serif !important;
+	font-size: 15px;
+	--color-primary: #7BB1EA;
+	--color-secondary: #fc5855;
+	--color-accent: #9661ed;
+	--color-neutral: #1D1821;
+	--color-base-100: #FFFFFF;
+	--color-info: #7BB1EA;
+	--color-info-bar: #256ebc;
+	--color-success: #0F7046;
+	--color-success-bar: #2F855A;
+	--color-warning: #96660D;
+	--color-warning-bar: #D9B879;
+	--color-error: #E85A4A;
+	--color-error-bar: #F2B0B0;
+}
+
+body {
+	background-color: var(--color-base-100);
+}
+
+::placeholder {
+	color: rgba(0, 0, 0, 0.2) !important;
+	font-weight: 500;
+}
+
+::selection {
+	background: var(--color-primary);
+}
+
+.iti__flag {background-image: url("path/to/flags.png");}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {background-image: url("path/to/flags@2x.png");}
+}
